@@ -1,9 +1,10 @@
 package dhm.com.dhmshop.view.main;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -80,6 +81,9 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         setupTabIcons();//设置底部TabLayout的item
 
 
+
+
+
     }
 
     @Override
@@ -88,11 +92,11 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     }
 
     //有几个底部的item就写几个
-    private void setupTabIcons() {
-        //tablayout图文效果
-        for (int i = 0; i < fragments.size(); i++) {
-            mMainTablayout.getTabAt(i).setCustomView(getView(i));
-        }
+     private void setupTabIcons() {
+         //tablayout图文效果
+         for (int i = 0; i < fragments.size(); i++) {
+             mMainTablayout.getTabAt(i).setCustomView(getView(i));
+         }
     }
 
     private View getView(int position) {
@@ -111,7 +115,7 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
 
 
         ArrayList<Integer> images = new ArrayList<>();
-        images.add(R.drawable.selector_home);
+        images.add(R.drawable.selector_show);
         images.add(R.drawable.selector_classification);
         images.add(R.drawable.selector_shoppingcart);
         images.add(R.drawable.selector_wode);
@@ -127,8 +131,6 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
             default:
                 break;
             case R.id.main_search:
-                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                startActivity(intent);
                 break;
             case R.id.main_vp:
                 break;
