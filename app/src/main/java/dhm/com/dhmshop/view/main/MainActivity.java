@@ -23,7 +23,6 @@ import dhm.com.dhmshop.fragment.wode.WodeFragment;
 
 public class MainActivity extends BaseActiity implements View.OnClickListener {
 
-    private LinearLayout mMainSearch;
     private ViewPager mMainVp;
     private TabLayout mMainTablayout;
     private LinearLayout mMainContainer;
@@ -42,11 +41,9 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
 
     @Override
     protected void initView() {
-        mMainSearch = (LinearLayout) findViewById(R.id.main_search);
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
         mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
         mMainContainer = (LinearLayout) findViewById(R.id.main_container);
-        mMainSearch.setOnClickListener(this);
         mMainVp.setOnClickListener(this);
         mMainTablayout.setOnClickListener(this);
 
@@ -100,16 +97,6 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         ImageView iv = (ImageView) tabitem.findViewById(R.id.tabiv);
         TextView tv = (TextView) tabitem.findViewById(R.id.tabtv);
         tv.setText(titles.get(position));
-
-       /* if (position == 0) {
-            nav_title.setTextColor(getResources().getColor(R.color.colorPrimary));
-            nav_icon.setTextColor(getResources().getColor(R.color.colorPrimary));
-        } else {
-            nav_title.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
-            nav_icon.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
-        }*/
-
-
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.drawable.selector_home);
         images.add(R.drawable.selector_classification);
@@ -126,10 +113,7 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         switch (v.getId()) {
             default:
                 break;
-            case R.id.main_search:
-                Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                startActivity(intent);
-                break;
+
             case R.id.main_vp:
                 break;
             case R.id.main_tablayout:

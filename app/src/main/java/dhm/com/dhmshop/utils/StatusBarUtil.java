@@ -17,6 +17,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import dhm.com.dhmshop.R;
+
 /**
  * @ClassName: StatusBarUtil
  * @Description:
@@ -50,6 +52,7 @@ public class StatusBarUtil {
             systemBarTintManager.setStatusBarTintColor(colorId);//设置状态栏颜色
         }
     }
+
 
     /**
      * 设置状态栏透明
