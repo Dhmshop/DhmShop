@@ -1,5 +1,7 @@
 package dhm.com.dhmshop.view.main;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -41,8 +43,10 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         return R.layout.activity_main;
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected void initView() {
+        getWindow().setStatusBarColor(Color.LTGRAY);
         mMainSearch = (LinearLayout) findViewById(R.id.main_search);
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
         mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
