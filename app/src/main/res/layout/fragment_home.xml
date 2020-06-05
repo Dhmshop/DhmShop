@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragment.home.HomeFragment">
 
     <LinearLayout
 
-        android:id="@+id/main_homefg"
-        android:layout_marginTop="@dimen/sp_13"
+        android:id="@+id/mainsearch_homefg"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_marginLeft="@dimen/dp_30"
-        android:layout_marginRight="@dimen/dp_30"
-        android:layout_marginBottom="@dimen/dp_13"
+        android:layout_height="@dimen/dp_35"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/sp_12"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_10"
         android:background="@drawable/mainsearchshape"
         android:gravity="center"
         android:orientation="horizontal">
@@ -21,6 +23,7 @@
         <ImageButton
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_10"
             android:background="@mipmap/magnifier" />
 
         <TextView
@@ -29,4 +32,17 @@
             android:text="请输入搜索关键词"
             android:textColor="#999999" />
     </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_homefg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_homefg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="#F7F6FB" />
 </LinearLayout>

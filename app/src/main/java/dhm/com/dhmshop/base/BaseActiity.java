@@ -36,10 +36,10 @@ public abstract class BaseActiity extends AppCompatActivity {
                         WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             }
             View decor = this.getWindow().getDecorView();
-            decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
         int layoutId = getLayout();
-        setContentView(layoutId);
+            setContentView(layoutId);
         //沉浸式代码配置
         //当FitsSystemWindows设置 true 时，会在屏幕最上方预留出状态栏高度的 padding
         StatusBarUtil.setRootViewFitsSystemWindows(this, true);

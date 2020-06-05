@@ -21,7 +21,7 @@ import dhm.com.dhmshop.fragment.home.HomeFragment;
 import dhm.com.dhmshop.fragment.shoppingcart.ShoppingcartFragment;
 import dhm.com.dhmshop.fragment.wode.WodeFragment;
 
-public class MainActivity extends BaseActiity implements View.OnClickListener {
+public class MainActivity extends BaseActiity{
 
     private ViewPager mMainVp;
     private TabLayout mMainTablayout;
@@ -44,8 +44,6 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
         mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
         mMainContainer = (LinearLayout) findViewById(R.id.main_container);
-        mMainVp.setOnClickListener(this);
-        mMainTablayout.setOnClickListener(this);
 
         mMainTablayout.setSelectedTabIndicatorHeight(0);
         //创建tab
@@ -108,16 +106,5 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
 
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                break;
 
-            case R.id.main_vp:
-                break;
-            case R.id.main_tablayout:
-                break;
-        }
-    }
 }
