@@ -1,10 +1,12 @@
 package dhm.com.dhmshop.base.netWork;
 
+import dhm.com.dhmshop.utils.EncryptUtil;
+
 public interface Constant {
     /**
      * 正则表达式：验证手机号
      */
-    public static final String REGEX_MOBILE = "^1[3-9]\\d{9}$";
+    public static final String REGEX_MOBILE = "/^[1][3,4,5,6,7,8,9][0-9]{9}$/";
 
     /**
      * 正则表达式：验证邮箱
@@ -14,8 +16,8 @@ public interface Constant {
     /**
      * 至少包含数字跟字母，可以有字符
      */
-    String reg = "/^\\w{6,16}$/";
-//    String reg = "(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&*()]{6,20}$";
+//    String reg = "/^\\w{6,16}$/";
+    String reg = "(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&*()]{6,20}$";
 
     /**
      * 正则表达式：只能是中文
@@ -51,91 +53,42 @@ public interface Constant {
 
 
 
+    String TOKEN= EncryptUtil.MD5("junzhicheng");
 
 
 
 
 
 
-    String PATH = "http://hl-api.51huole.cn/api/";
-    //判断手机号是否存在
-    String EXITS_PHONE = "exists_phone";
 
-    //发送手机验证码
-    String SEND_SMS= "send_sms";
+    String PATH = "http://app.jzcto.com";
 
     //登录
-    String LOGIN= "login_p";
+    String LOGIN= "/appapi/user/login";
 
-    //生成图形验证码
-    String CATPCHA= "captcha";
+//    用户注册
+    String UserRegist= "/appapi/user/register";
 
-    //判断图形验证码是否正确
-    String VERIFY_GCODE= "verify_gcode";
-
-    //判断手机验证码是否正确
-    String VERIFY_PCODE= "verify_pcode";
-
-    //判断手机验证码是否正确
-    String MODIFY_PWD= "modify_pwd";
+//    商户注册
+    String ShopRegist= "/appapi/user/shop_register";
 
 
-    //个人认证
-    String PERSONAL_CERTIFICATE="personal_certificate";
+    //修改头像
+    String ChangeHeadImage= "/appapi/user/modify_headsmall";
 
+    //修改用户信息
+    String ChangeUserInfo= "/appapi/user/update_info";
 
-    //经纪公司认证
-    String JYP_CERTIFICATE="jyp_certificate";
+    //发送验证码
+    String SendMessage= "/appapi/user/send_message";
 
+    //修改用户密码
+    String SetNewPass= "/appapi/user/set_new_pass";
 
-    //企业认证
-    String ENTERPRISE_CERTIFICATE="enterprise_certificate";
-
-    //明星认证
-    String STAR_CERTIFICATE="star_certificate";
-
-    //经纪人认证
-    String BROKER_CERTIFICATE="broker_certificate";
-
-    //首页轮播文字
-    String SEEK_CAROUSEL="seek_carousel";
-
-    //首页轮播图片
-    String SEEK_BANNER="seek_banner";
-
-    //首页热门明星
-    String SEEKHOTSTAR="seek_hot_star?offset=";
-
-    //首页火演推荐
-    String SEEKRECOMMENDSTAR="seek_recommend_star?offset=";
-
-    //首页火演推荐
-    String SEEKPRIJECTDOCK="seek_project_dock";
-
-    //首页火演推荐
-    String SEARCH_STAR="search_star?kw=";
-
-
-    //首页火演推荐
-    String NOSTAR="feedback_nostarfound?uid=";
+    //修改用户信息
+    String CheckUser= "/appapi/user/check_user";
 
 
 
-    //首页明星详情页
-    String GETSINGER="get_singer?uid=";
-
-
-
-
-    //首页明星详情页
-    String SIMGERLIST="singer_list?offset=";
-
-
-    //首页明星详情页
-    String SINGERALL="singer_all_price?uid=";
-
-
-    //首页明星详情页
-    String CITIES="cities";
 
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import dhm.com.dhmshop.base.netWork.Constant;
 
@@ -33,7 +34,7 @@ public class StringUtils {
      * @param mobiles
      * @return [0-9]{5,9}
      */
-    public boolean isMobileNO(String mobiles) {
+    public static boolean isMobileNO(String mobiles) {
         try {
             Pattern p = compile("/^[1][3,4,5,7,8][0-9]{9}$/");
             Matcher m = p.matcher(mobiles);
@@ -41,6 +42,15 @@ public class StringUtils {
         } catch (Exception e) {
         }
         return false;
+    }
+
+
+    public static boolean isChinaPhoneLegal(String str)
+            throws PatternSyntaxException {
+        String regExp = "^((13[0-9])|(15[^4])|(18[0-9])|(17[0-8])|(147,145))\\d{8}$";
+        Pattern p = Pattern.compile(regExp);
+        Matcher m = p.matcher(str);
+        return !m.matches();
     }
 
     /**
@@ -53,6 +63,8 @@ public class StringUtils {
         return matcherRegistMobile.matches();
     }
 
+
+
     /**
      * 正则验证只能是中文
      */
@@ -60,7 +72,7 @@ public class StringUtils {
         @SuppressLint("WrongConstant")
         Pattern patternRegistMobile = compile(Constant.CHINESE, CASE_INSENSITIVE);
         Matcher matcherRegistMobile = patternRegistMobile.matcher(phone);
-        return matcherRegistMobile.matches();
+        return !matcherRegistMobile.matches();
     }
 
     /**
@@ -70,7 +82,7 @@ public class StringUtils {
         @SuppressLint("WrongConstant")
         Pattern patternRegistMobile = compile(Constant.REGEX_EMAIL, CASE_INSENSITIVE);
         Matcher matcherRegistMobile = patternRegistMobile.matcher(email);
-        return matcherRegistMobile.matches();
+        return !matcherRegistMobile.matches();
     }
 
 
@@ -82,7 +94,7 @@ public class StringUtils {
         @SuppressLint("WrongConstant")
         Pattern patternRegistMobile = compile(Constant.reg, CASE_INSENSITIVE);
         Matcher matcherRegistMobile = patternRegistMobile.matcher(pwd);
-        return matcherRegistMobile.matches();
+        return !matcherRegistMobile.matches();
     }
 
 
@@ -93,7 +105,7 @@ public class StringUtils {
         @SuppressLint("WrongConstant")
         Pattern patternRegistMobile = compile(Constant.reg, CASE_INSENSITIVE);
         Matcher matcherRegistMobile = patternRegistMobile.matcher(company);
-        return matcherRegistMobile.matches();
+        return !matcherRegistMobile.matches();
     }
 
 
