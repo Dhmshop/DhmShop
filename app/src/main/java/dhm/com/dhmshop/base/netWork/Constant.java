@@ -14,7 +14,13 @@ public interface Constant {
     /**
      * 至少包含数字跟字母，可以有字符
      */
-    String reg = "(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&*()]{6,20}$";
+    String reg = "/^\\w{6,16}$/";
+//    String reg = "(?=.*([a-zA-Z].*))(?=.*[0-9].*)[a-zA-Z0-9-*/+.~!@#$%^&*()]{6,20}$";
+
+    /**
+     * 正则表达式：只能是中文
+     */
+    public static final String CHINESE = "[\\u4e00-\\u9fa5]+";
 
     /**
      * 正则表达式：名字
