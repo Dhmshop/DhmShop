@@ -24,9 +24,8 @@ import dhm.com.dhmshop.fragment.home.HomeFragment;
 import dhm.com.dhmshop.fragment.shoppingcart.ShoppingcartFragment;
 import dhm.com.dhmshop.fragment.wode.WodeFragment;
 
-public class MainActivity extends BaseActiity implements View.OnClickListener {
+public class MainActivity extends BaseActiity{
 
-    private LinearLayout mMainSearch;
     private ViewPager mMainVp;
     private TabLayout mMainTablayout;
     private LinearLayout mMainContainer;
@@ -46,14 +45,14 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     @SuppressLint("NewApi")
     @Override
     protected void initView() {
+<<<<<<< HEAD
+=======
         getWindow().setStatusBarColor(Color.LTGRAY);
         mMainSearch = (LinearLayout) findViewById(R.id.main_search);
+>>>>>>> 0128371624ded0afcc442e236838e977bdc981c4
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
         mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
         mMainContainer = (LinearLayout) findViewById(R.id.main_container);
-        mMainSearch.setOnClickListener(this);
-        mMainVp.setOnClickListener(this);
-        mMainTablayout.setOnClickListener(this);
 
         mMainTablayout.setSelectedTabIndicatorHeight(0);
         //创建tab
@@ -108,16 +107,6 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         ImageView iv = (ImageView) tabitem.findViewById(R.id.tabiv);
         TextView tv = (TextView) tabitem.findViewById(R.id.tabtv);
         tv.setText(titles.get(position));
-
-       /* if (position == 0) {
-            nav_title.setTextColor(getResources().getColor(R.color.colorPrimary));
-            nav_icon.setTextColor(getResources().getColor(R.color.colorPrimary));
-        } else {
-            nav_title.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
-            nav_icon.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
-        }*/
-
-
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.drawable.selector_show);
         images.add(R.drawable.selector_classification);
@@ -129,6 +118,9 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
 
     }
 
+<<<<<<< HEAD
+
+=======
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -142,4 +134,5 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
                 break;
         }
     }
+>>>>>>> 0128371624ded0afcc442e236838e977bdc981c4
 }

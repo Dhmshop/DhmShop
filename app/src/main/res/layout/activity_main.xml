@@ -5,6 +5,11 @@
     android:id="@+id/main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
+    android:orientation="vertical"
+    tools:context=".view.main.MainActivity">
+
+=======
     android:fitsSystemWindows="true"
     android:background="#ffffff"
     android:orientation="vertical"
@@ -34,6 +39,7 @@
             android:textColor="#999999" />
     </LinearLayout>
 
+>>>>>>> 0128371624ded0afcc442e236838e977bdc981c4
     <android.support.v4.view.ViewPager
         android:id="@+id/main_vp"
         android:layout_width="match_parent"
