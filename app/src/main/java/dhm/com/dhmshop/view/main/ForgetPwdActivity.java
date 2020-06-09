@@ -98,7 +98,7 @@ public class ForgetPwdActivity extends BaseActiity implements LoginContract.IVie
             public void afterTextChanged(Editable editable) {
                 String s = userphone.getText().toString();
                 if (isname&&isver){
-                    if (s==null||s.equals("")){
+                    if (s.isEmpty()||s.equals("")){
                         sure.setClickable(false);
                         sure.setBackgroundResource(R.drawable.back_registn);
                         isphone=false;
@@ -109,7 +109,7 @@ public class ForgetPwdActivity extends BaseActiity implements LoginContract.IVie
                     }
                 }else {
                     sure.setClickable(false);
-                    if (s==null||s.equals("")){
+                    if (s.isEmpty()||s.equals("")){
                         isphone=false;
                     }else {
                         isphone=true;
@@ -135,7 +135,7 @@ public class ForgetPwdActivity extends BaseActiity implements LoginContract.IVie
             public void afterTextChanged(Editable editable) {
                 String s = username.getText().toString();
                 if (isphone&&isver){
-                    if (s==null||s.equals("")){
+                    if (s.isEmpty()||s.equals("")){
                         sure.setClickable(false);
                         sure.setBackgroundResource(R.drawable.back_registn);
                         isname=false;
@@ -146,7 +146,7 @@ public class ForgetPwdActivity extends BaseActiity implements LoginContract.IVie
                     }
                 }else {
                     sure.setClickable(false);
-                    if (s==null||s.equals("")){
+                    if (s.isEmpty()||s.equals("")){
                         isname=false;
                     }else {
                         isname=true;
@@ -171,7 +171,7 @@ public class ForgetPwdActivity extends BaseActiity implements LoginContract.IVie
             public void afterTextChanged(Editable editable) {
                 String s = verification.getText().toString();
                 if (isphone&&isname){
-                    if (s==null||s.equals("")){
+                    if (s.isEmpty()||s.equals("")){
                         sure.setClickable(false);
                         sure.setBackgroundResource(R.drawable.back_registn);
                         isver=false;
@@ -182,7 +182,7 @@ public class ForgetPwdActivity extends BaseActiity implements LoginContract.IVie
                     }
                 }else {
                     sure.setClickable(false);
-                    if (s==null||s.equals("")){
+                    if (s.isEmpty()||s.equals("")){
                         isver=false;
                     }else {
                         isver=true;
@@ -203,7 +203,7 @@ public class ForgetPwdActivity extends BaseActiity implements LoginContract.IVie
                 break;
             case R.id.get_verification:
                 String phones = userphone.getText().toString();
-                if (phones==null||phones.equals("")){
+                if (phones.isEmpty()||phones.equals("")){
                     Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -221,7 +221,7 @@ public class ForgetPwdActivity extends BaseActiity implements LoginContract.IVie
                 String name = username.getText().toString();
                 String phone = userphone.getText().toString();
                 String verifications = verification.getText().toString();
-                if (name==null||name.equals("")||phone==null||phone.equals("")||verifications==null||verifications.equals("")){
+                if (name.isEmpty()||name.equals("")||phone.isEmpty()||phone.equals("")||verifications.isEmpty()||verifications.equals("")){
                     Toast.makeText(this, "请检查数据", Toast.LENGTH_SHORT).show();
                     return;
                 }

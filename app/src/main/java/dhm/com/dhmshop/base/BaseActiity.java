@@ -1,6 +1,7 @@
 package dhm.com.dhmshop.base;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,29 +15,45 @@ import android.view.WindowManager;
 
 import dhm.com.dhmshop.utils.StatusBarUtil;
 
+import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+
 public abstract class BaseActiity extends AppCompatActivity {
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         int layoutId = getLayout();
             setContentView(layoutId);
-//        //沉浸式代码配置
-//        //当FitsSystemWindows设置 true 时，会在屏幕最上方预留出状态栏高度的 padding
-//        StatusBarUtil.setRootViewFitsSystemWindows(this, true);
-//        //设置状态栏透明
-//        StatusBarUtil.setTranslucentStatus(this);
-//        //一般的手机的状态栏文字和图标都是白色的, 可如果你的应用也是纯白色的, 或导致状态栏文字看不清
-//        //所以如果你是这种情况,请使用以下代码, 设置状态使用深色文字图标风格, 否则你可以选择性注释掉这个if内容
-//        if (!StatusBarUtil.setStatusBarDarkTheme(this, true)) {
-//            //如果不支持设置深色风格 为了兼容总不能让状态栏白白的看不清, 于是设置一个状态栏颜色为半透明,
-//            //这样半透明+白=灰, 状态栏的文字能看得清
-//            StatusBarUtil.setStatusBarColor(this, 0x55000000);
-//        }
 
+//        Window window = getWindow();
+//        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+//                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+//                | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//        // 状态栏（以上几行代码必须，参考setStatusBarColor|setNavigationBarColor方法源码）
+//        window.setNavigationBarColor(Color.BLACK);
+        Window window = getWindow();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        // 状态栏（以上几行代码必须，参考setStatusBarColor|setNavigationBarColor方法源码）
+        window.setNavigationBarColor(Color.BLACK);
         initView();
         stateNetWork();
         initData();
 
+    }
+
+    @SuppressLint("NewApi")
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        getWindow().setNavigationBarColor(Color.parseColor("#000000"));
     }
 
     protected abstract int getLayout();
@@ -84,6 +101,4 @@ public abstract class BaseActiity extends AppCompatActivity {
     public void exit(){    //将所有的Activity全部销毁
         finish();
     }
-
-
 }

@@ -8,11 +8,11 @@ import android.os.Bundle;
 import dhm.com.dhmshop.R;
 import dhm.com.dhmshop.base.BaseActiity;
 
-public class AboutActivity extends BaseActiity {
+public class SafeActivity extends BaseActiity {
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_about;
+        return R.layout.activity_safe;
     }
 
     @SuppressLint("NewApi")

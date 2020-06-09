@@ -88,6 +88,24 @@ public interface Constant {
     //修改用户信息
     String CheckUser= "/appapi/user/check_user";
 
+    //获取用户信息
+    String GetUserInfo= "/appapi/user/get_userinfo";
+
+    //获取用户收货地址列表
+    String GetUserAddr= "/appapi/user/get_address";
+
+    //新增收货地址
+    String AddAddress= "/appapi/user/add_address";
+
+    //修改手机号
+    String ChangePhone= "/appapi/user/modify_mobile";
+
+    //获取某个收货地址
+    String GetAddress= "/appapi/user/get_address_info";
+
+    //修改收货地址
+    String EditAddress= "/appapi/user/edit_address";
+
 
 
 

@@ -2,6 +2,7 @@ package dhm.com.dhmshop.view.main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,6 +10,8 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -31,6 +34,8 @@ import dhm.com.dhmshop.base.netWork.LoginContract;
 import dhm.com.dhmshop.entity.UserLogin;
 import dhm.com.dhmshop.utils.SpUtils;
 import dhm.com.dhmshop.utils.StringUtils;
+
+import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
 
 public class LoginActivity extends BaseActiity implements LoginContract.IView {
 
@@ -64,6 +69,7 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
     private String type = "3";
     private Drawable drawable;
     private Drawable drawables;
+    private String uid;
 
     @Override
     protected int getLayout() {
@@ -75,16 +81,24 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
         ButterKnife.bind(this);
         pressenter=new PressenterImpl();
         pressenter.attachView(this);
-
+        uid = SpUtils.getString(this, "uid");
     }
+
 
     private boolean isuser=false;
     private boolean ispwd=false;
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "NewApi"})
     @Override
     protected void initData() {
+        getWindow().setStatusBarColor(getResources().getColor(R.color.main));
+
         login.setClickable(false);
+//        if (uid!=null){
+//            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+//            startActivity(intent);
+//        }
+
         userpwd.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -214,6 +228,14 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
 
     }
 
+    @SuppressLint("NewApi")
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//        getWindow().setNavigationBarColor(Color.parseColor("#aaddff"));
+    }
+
     private void showOrHide(EditText etPassword){
         //记住光标开始的位置
         int pos = etPassword.getSelectionStart();
@@ -306,6 +328,8 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);
                 finish();
+            }else {
+                Toast.makeText(this, userLogin.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
         }

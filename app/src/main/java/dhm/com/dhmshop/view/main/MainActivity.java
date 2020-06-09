@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,6 @@ import dhm.com.dhmshop.fragment.wode.WodeFragment;
 
 public class MainActivity extends BaseActiity implements View.OnClickListener {
 
-    private LinearLayout mMainSearch;
     private ViewPager mMainVp;
     private TabLayout mMainTablayout;
     private LinearLayout mMainContainer;
@@ -47,15 +47,12 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     @Override
     protected void initView() {
         getWindow().setStatusBarColor(Color.LTGRAY);
-        mMainSearch = (LinearLayout) findViewById(R.id.main_search);
+        getWindow().setNavigationBarColor(Color.BLACK);
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
         mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
         mMainContainer = (LinearLayout) findViewById(R.id.main_container);
-        mMainSearch.setOnClickListener(this);
         mMainVp.setOnClickListener(this);
         mMainTablayout.setOnClickListener(this);
-
-        mMainTablayout.setSelectedTabIndicatorHeight(0);
         //创建tab
         titles = new ArrayList<>();
         titles.add("首页");
@@ -79,6 +76,7 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
 
         //绑定适配器
         mMainVp.setAdapter(mainVpFgAdapter);
+        mMainVp.setOffscreenPageLimit(0);
         //设置联动
         mMainTablayout.setupWithViewPager(mMainVp);
 
@@ -103,6 +101,7 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
          }
     }
 
+    @SuppressLint("NewApi")
     private View getView(int position) {
         View tabitem = LayoutInflater.from(this).inflate(R.layout.tabitem, null);
         ImageView iv = (ImageView) tabitem.findViewById(R.id.tabiv);
@@ -117,6 +116,18 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
             nav_icon.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
         }*/
 
+
+       switch (position){
+           case 0:
+           case 1:
+           case 2:
+               getWindow().setStatusBarColor(Color.LTGRAY);
+               break;
+           case 3:
+               getWindow().setStatusBarColor(getResources().getColor(R.color.main));
+               break;
+           default:
+       }
 
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.drawable.selector_show);
@@ -133,8 +144,6 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             default:
-                break;
-            case R.id.main_search:
                 break;
             case R.id.main_vp:
                 break;

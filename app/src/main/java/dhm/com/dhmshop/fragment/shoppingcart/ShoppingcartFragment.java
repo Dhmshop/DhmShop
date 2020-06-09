@@ -1,6 +1,8 @@
 package dhm.com.dhmshop.fragment.shoppingcart;
 
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -31,7 +33,7 @@ public class ShoppingcartFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView(View view) {
+    protected void initView() {
 
     }
 

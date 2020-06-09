@@ -77,7 +77,7 @@ public class ReSetActivity extends BaseActiity implements LoginContract.IView {
             public void afterTextChanged(Editable editable) {
                 String s = userpwd.getText().toString();
                 if (isrepwd){
-                    if (s==null||s.equals("")){
+                    if (s.isEmpty()||s.equals("")){
                         login.setClickable(false);
                         login.setBackgroundResource(R.drawable.back_registn);
                         ispwd=false;
@@ -88,7 +88,7 @@ public class ReSetActivity extends BaseActiity implements LoginContract.IView {
                     }
                 }else {
                     login.setClickable(false);
-                    if (s==null||s.equals("")){
+                    if (s.isEmpty()||s.equals("")){
                         ispwd=false;
                     }else {
                         ispwd=true;
@@ -112,7 +112,7 @@ public class ReSetActivity extends BaseActiity implements LoginContract.IView {
             public void afterTextChanged(Editable editable) {
                 String s = repwd.getText().toString();
                 if (ispwd){
-                    if (s==null||s.equals("")){
+                    if (s.isEmpty()||s.equals("")){
                         login.setClickable(false);
                         login.setBackgroundResource(R.drawable.back_registn);
                         isrepwd=false;
@@ -123,7 +123,7 @@ public class ReSetActivity extends BaseActiity implements LoginContract.IView {
                     }
                 }else {
                     login.setClickable(false);
-                    if (s==null||s.equals("")){
+                    if (s.isEmpty()||s.equals("")){
                         isrepwd=false;
                     }else {
                         isrepwd=true;
@@ -146,7 +146,7 @@ public class ReSetActivity extends BaseActiity implements LoginContract.IView {
             case R.id.login:
                 String pwd = userpwd.getText().toString();
                 String respwd = repwd.getText().toString();
-                if (pwd==null||pwd.equals("")||respwd==null||respwd.equals("")){
+                if (pwd.isEmpty()||pwd.equals("")||respwd.isEmpty()||respwd.equals("")){
                     Toast.makeText(this, "请检查数据", Toast.LENGTH_SHORT).show();
                     return;
                 }
