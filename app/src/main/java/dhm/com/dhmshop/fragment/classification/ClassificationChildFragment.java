@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -54,16 +55,12 @@ public class ClassificationChildFragment extends BaseFragment implements View.On
         titles.add("辣条");
         titles.add("女装");
         titles.add("牛仔裤女");
-        ArrayList<Integer> images = new ArrayList<>();
-        images.add(R.drawable.home_true);
-        images.add(R.drawable.home_false);
-        images.add(R.drawable.classification_true);
-        images.add(R.drawable.classification_false);
-        images.add(R.drawable.shopcart_true);
-        images.add(R.drawable.shopcart_false);
-        ClassificationItemAdapter classificationItemAdapter = new ClassificationItemAdapter(getActivity(), titles, images);
+
+        ClassificationItemAdapter classificationItemAdapter = new ClassificationItemAdapter(getActivity(), titles);
 
         mRecyclerviewClassificationchild.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+
+
         mRecyclerviewClassificationchild.setAdapter(classificationItemAdapter);
 
 

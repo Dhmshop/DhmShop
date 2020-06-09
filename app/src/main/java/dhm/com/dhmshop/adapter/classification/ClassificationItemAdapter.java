@@ -14,15 +14,15 @@ import java.util.ArrayList;
 
 import dhm.com.dhmshop.R;
 
-public class ClassificationItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ClassificationItemAdapter extends RecyclerView.Adapter {
     private Context context;
     ArrayList<String> titles;
-    ArrayList<Integer> images;
 
-    public ClassificationItemAdapter(Context context, ArrayList<String> titles, ArrayList<Integer> images) {
+
+    public ClassificationItemAdapter(Context context, ArrayList<String> titles) {
         this.context = context;
         this.titles = titles;
-        this.images = images;
+
     }
 
     @NonNull
@@ -34,6 +34,8 @@ public class ClassificationItemAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        ItemViewHolder itemViewHolder = (ItemViewHolder) viewHolder;
+        itemViewHolder.tv.setText(titles.get(i));
 
     }
 
@@ -41,18 +43,16 @@ public class ClassificationItemAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public int getItemCount() {
 
-        return titles.size()+images.size();
+        return titles.size();
     }
 
-    public static class ItemViewHolder extends RecyclerView.ViewHolder {
+    public class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tv;
-        public ImageView iv;
+        TextView tv;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             tv = itemView.findViewById(R.id.tv);
-            iv = itemView.findViewById(R.id.iv);
         }
     }
 }

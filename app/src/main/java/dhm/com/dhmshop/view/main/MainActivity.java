@@ -29,6 +29,7 @@ public class MainActivity extends BaseActiity{
     private ViewPager mMainVp;
     private TabLayout mMainTablayout;
     private LinearLayout mMainContainer;
+
     private ArrayList<String> titles;
     private ArrayList<Fragment> fragments;
     private HomeFragment homeFragment;
@@ -45,11 +46,10 @@ public class MainActivity extends BaseActiity{
     @SuppressLint("NewApi")
     @Override
     protected void initView() {
-<<<<<<< HEAD
-=======
+
         getWindow().setStatusBarColor(Color.LTGRAY);
-        mMainSearch = (LinearLayout) findViewById(R.id.main_search);
->>>>>>> 0128371624ded0afcc442e236838e977bdc981c4
+
+
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
         mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
         mMainContainer = (LinearLayout) findViewById(R.id.main_container);
@@ -118,21 +118,7 @@ public class MainActivity extends BaseActiity{
 
     }
 
-<<<<<<< HEAD
 
-=======
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                break;
-            case R.id.main_search:
-                break;
-            case R.id.main_vp:
-                break;
-            case R.id.main_tablayout:
-                break;
-        }
-    }
->>>>>>> 0128371624ded0afcc442e236838e977bdc981c4
+
+
 }
