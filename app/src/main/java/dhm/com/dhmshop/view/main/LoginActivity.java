@@ -202,7 +202,7 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
                 lineUser.setBackgroundColor(getResources().getColor(R.color.white));
                 break;
             case R.id.login:
-                String name = username.getText().toString();
+                /*String name = username.getText().toString();
                 String pwd = userpwd.getText().toString();
                 if (name==null||name.equals("")||pwd==null||pwd.equals("")){
                     Toast.makeText(this, "请检查数据", Toast.LENGTH_SHORT).show();
@@ -212,6 +212,8 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
                     Toast.makeText(this, "密码格式不正确", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                intent=new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(intent);*/
                 intent=new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);
                 break;
