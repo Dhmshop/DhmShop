@@ -30,6 +30,7 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     private ViewPager mMainVp;
     private TabLayout mMainTablayout;
     private LinearLayout mMainContainer;
+
     private ArrayList<String> titles;
     private ArrayList<Fragment> fragments;
     private HomeFragment homeFragment;
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     @SuppressLint("NewApi")
     @Override
     protected void initView() {
+
         getWindow().setStatusBarColor(Color.LTGRAY);
         getWindow().setNavigationBarColor(Color.BLACK);
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
@@ -53,6 +55,13 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         mMainContainer = (LinearLayout) findViewById(R.id.main_container);
         mMainVp.setOnClickListener(this);
         mMainTablayout.setOnClickListener(this);
+
+
+        mMainVp = (ViewPager) findViewById(R.id.main_vp);
+        mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
+        mMainContainer = (LinearLayout) findViewById(R.id.main_container);
+
+        mMainTablayout.setSelectedTabIndicatorHeight(0);
         //创建tab
         titles = new ArrayList<>();
         titles.add("首页");
@@ -151,4 +160,7 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
                 break;
         }
     }
+
+
+
 }

@@ -18,6 +18,7 @@
         <activity android:name=".view.mine.JsActivity"></activity>
         <activity android:name=".view.mine.SafeActivity" />
         <activity android:name=".view.mine.MyinfoActivity" />
+        <activity android:name=".view.main.SearchActivity"></activity>
         <activity android:name=".view.mine.AddaddrActivity" />
         <activity android:name=".view.mine.AddressActivity" />
         <activity android:name=".view.mine.AboutActivity" />

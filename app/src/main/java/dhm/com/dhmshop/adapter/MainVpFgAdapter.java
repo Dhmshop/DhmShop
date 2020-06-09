@@ -28,10 +28,4 @@ public class MainVpFgAdapter extends FragmentPagerAdapter {
         return fragments.size();
     }
 
-    /*@Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-
-        return titles.get(position);
-    }*/
 }
