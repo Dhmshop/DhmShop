@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 点击之后 -->
+    <item android:state_pressed="true">
+        <layer-list>
+            <item android:bottom="4dp" android:right="4dp">
+                <shape>
+                    <solid android:color="@color/main" />
+                    <corners android:radius="3dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <!-- 正常状态 -->
+    <item>
+        <layer-list>
+            <!-- 第一层 -->
+            <item android:bottom="2dp" android:right="2dp">
+                <shape>
+                    <solid android:color="#FFF2F6" />
+                    <corners android:radius="3dp" />
+                </shape>
+            </item>
+            <!-- 第二层 -->
+            <item android:bottom="4dp" android:right="4dp">
+                <shape>
+                    <solid android:color="#FFF3F7" />
+                    <corners android:radius="3dp" />
+                </shape>
+            </item>
+            <!-- 第三层 -->
+            <item android:bottom="6dp" android:right="6dp">
+                <shape>
+                    <solid android:color="#FFF4F7" />
+                    <corners android:radius="3dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    >
+    <Button
+        android:background="@drawable/back_add"
+        android:textSize="@dimen/sp_14"
+        android:id="@+id/reverse"
+        android:text="一"
+        android:textColor="#999999"
+        android:layout_width="@dimen/dp_25"
+        android:layout_height="@dimen/dp_23" />
+    <EditText
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_16"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_23"
+        android:text="1"
+        android:id="@+id/count"
+        android:gravity="center"
+        android:background="@drawable/back_center"
+        />
+    <Button
+        android:id="@+id/add"
+        android:textColor="@color/mainblack"
+        android:textSize="@dimen/sp_14"
+        android:text="+"
+        android:background="@drawable/back_right"
+        android:layout_width="@dimen/dp_25"
+        android:layout_height="@dimen/dp_23" />
+
+
+</LinearLayout>

@@ -34,9 +34,9 @@ public class ClassificationItemAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-
+        
     }
+
 
     @Override
     public int getItemCount() {

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import dhm.com.dhmshop.R;
+import dhm.com.dhmshop.base.BaseFragment;
 
 //import androidx.fragment.app.Fragment;
 
@@ -16,7 +17,7 @@ import dhm.com.dhmshop.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShoppingcartFragment extends Fragment {
+public class ShoppingcartFragment extends BaseFragment {
 
 
     public ShoppingcartFragment() {
@@ -25,10 +26,18 @@ public class ShoppingcartFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shoppingcart, container, false);
+    protected int getLayout() {
+        return R.layout.fragment_shoppingcart;
+    }
+
+    @Override
+    protected void initView(View view) {
+
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
 }

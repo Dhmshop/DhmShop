@@ -1,9 +1,12 @@
 package dhm.com.dhmshop.view.main;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -39,8 +42,14 @@ public class MainActivity extends BaseActiity{
         return R.layout.activity_main;
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected void initView() {
+<<<<<<< HEAD
+=======
+        getWindow().setStatusBarColor(Color.LTGRAY);
+        mMainSearch = (LinearLayout) findViewById(R.id.main_search);
+>>>>>>> 0128371624ded0afcc442e236838e977bdc981c4
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
         mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
         mMainContainer = (LinearLayout) findViewById(R.id.main_container);
@@ -75,6 +84,9 @@ public class MainActivity extends BaseActiity{
         setupTabIcons();//设置底部TabLayout的item
 
 
+
+
+
     }
 
     @Override
@@ -83,11 +95,11 @@ public class MainActivity extends BaseActiity{
     }
 
     //有几个底部的item就写几个
-    private void setupTabIcons() {
-        //tablayout图文效果
-        for (int i = 0; i < fragments.size(); i++) {
-            mMainTablayout.getTabAt(i).setCustomView(getView(i));
-        }
+     private void setupTabIcons() {
+         //tablayout图文效果
+         for (int i = 0; i < fragments.size(); i++) {
+             mMainTablayout.getTabAt(i).setCustomView(getView(i));
+         }
     }
 
     private View getView(int position) {
@@ -96,7 +108,7 @@ public class MainActivity extends BaseActiity{
         TextView tv = (TextView) tabitem.findViewById(R.id.tabtv);
         tv.setText(titles.get(position));
         ArrayList<Integer> images = new ArrayList<>();
-        images.add(R.drawable.selector_home);
+        images.add(R.drawable.selector_show);
         images.add(R.drawable.selector_classification);
         images.add(R.drawable.selector_shoppingcart);
         images.add(R.drawable.selector_wode);
@@ -106,5 +118,21 @@ public class MainActivity extends BaseActiity{
 
     }
 
+<<<<<<< HEAD
 
+=======
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.main_search:
+                break;
+            case R.id.main_vp:
+                break;
+            case R.id.main_tablayout:
+                break;
+        }
+    }
+>>>>>>> 0128371624ded0afcc442e236838e977bdc981c4
 }
