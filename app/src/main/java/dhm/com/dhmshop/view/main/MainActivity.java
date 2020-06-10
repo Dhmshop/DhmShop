@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ import dhm.com.dhmshop.fragment.home.HomeFragment;
 import dhm.com.dhmshop.fragment.shoppingcart.ShoppingcartFragment;
 import dhm.com.dhmshop.fragment.wode.WodeFragment;
 
-public class MainActivity extends BaseActiity{
+public class MainActivity extends BaseActiity implements View.OnClickListener {
 
     private ViewPager mMainVp;
     private TabLayout mMainTablayout;
@@ -48,6 +49,12 @@ public class MainActivity extends BaseActiity{
     protected void initView() {
 
         getWindow().setStatusBarColor(Color.LTGRAY);
+        getWindow().setNavigationBarColor(Color.BLACK);
+        mMainVp = (ViewPager) findViewById(R.id.main_vp);
+        mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
+        mMainContainer = (LinearLayout) findViewById(R.id.main_container);
+        mMainVp.setOnClickListener(this);
+        mMainTablayout.setOnClickListener(this);
 
 
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
@@ -78,6 +85,7 @@ public class MainActivity extends BaseActiity{
 
         //绑定适配器
         mMainVp.setAdapter(mainVpFgAdapter);
+        mMainVp.setOffscreenPageLimit(0);
         //设置联动
         mMainTablayout.setupWithViewPager(mMainVp);
 
@@ -102,11 +110,34 @@ public class MainActivity extends BaseActiity{
          }
     }
 
+    @SuppressLint("NewApi")
     private View getView(int position) {
         View tabitem = LayoutInflater.from(this).inflate(R.layout.tabitem, null);
         ImageView iv = (ImageView) tabitem.findViewById(R.id.tabiv);
         TextView tv = (TextView) tabitem.findViewById(R.id.tabtv);
         tv.setText(titles.get(position));
+
+       /* if (position == 0) {
+            nav_title.setTextColor(getResources().getColor(R.color.colorPrimary));
+            nav_icon.setTextColor(getResources().getColor(R.color.colorPrimary));
+        } else {
+            nav_title.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
+            nav_icon.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
+        }*/
+
+
+       switch (position){
+           case 0:
+           case 1:
+           case 2:
+               getWindow().setStatusBarColor(Color.LTGRAY);
+               break;
+           case 3:
+               getWindow().setStatusBarColor(getResources().getColor(R.color.main));
+               break;
+           default:
+       }
+
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.drawable.selector_show);
         images.add(R.drawable.selector_classification);
@@ -118,6 +149,17 @@ public class MainActivity extends BaseActiity{
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.main_vp:
+                break;
+            case R.id.main_tablayout:
+                break;
+        }
+    }
 
 
 

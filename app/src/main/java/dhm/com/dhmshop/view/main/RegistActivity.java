@@ -5,6 +5,8 @@ import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -13,6 +15,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -29,15 +33,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.zhy.http.okhttp.OkHttpUtils;
 
+import dhm.com.dhmshop.entity.Result;
+import dhm.com.dhmshop.entity.ResultDetailCallback;
+import dhm.com.dhmshop.utils.BitmapUtil;
+import okhttp3.Call;
+
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dhm.com.dhmshop.R;
 import dhm.com.dhmshop.base.BaseActiity;
+import dhm.com.dhmshop.base.Presenter.PressenterImpl;
+import dhm.com.dhmshop.base.netWork.Constant;
 import dhm.com.dhmshop.base.netWork.LoginContract;
+import dhm.com.dhmshop.entity.Bean;
 import dhm.com.dhmshop.utils.StringUtils;
 
 public class RegistActivity extends BaseActiity implements LoginContract.IView {
@@ -73,11 +89,14 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
     private Uri uritwo;
     private Uri urithree;
 
-    private boolean isname;
-    private boolean ispwd;
-    private boolean isphone;
-    private boolean isver;
-
+    private Drawable drawable;
+    private Drawable drawables;
+    private boolean isname=false;
+    private boolean ispwd=false;
+    private boolean isrepwd=false;
+    private boolean isphone=false;
+    private boolean isver=false;
+    private PressenterImpl pressenter;
     private int djs=60;
     @SuppressLint("HandlerLeak")
     private Handler handler=new Handler(){
@@ -98,7 +117,7 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
         }
     };
     private String type;
-
+    private int beans=0;
 
 
     @Override
@@ -111,13 +130,16 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
     protected void initView() {
         ButterKnife.bind(this);
         getWindow().setStatusBarColor(Color.LTGRAY);
+        pressenter=new PressenterImpl();
+        pressenter.attachView(this);
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initData() {
         type = getIntent().getStringExtra("type");
-        if (type.equals("1")){
+        if (type.equals("3")){
             lineCus.setVisibility(View.GONE);
         }else if (type.equals("2")){
             lineCus.setVisibility(View.VISIBLE);
@@ -176,18 +198,33 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
             @Override
             public void afterTextChanged(Editable editable) {
                 String s = userName.getText().toString();
-                if (ispwd||isphone||isver){
+                if (ispwd&&isphone&&isver&&isrepwd){
                     if (s==null||s.equals("")){
+                        regist.setClickable(false);
+                        Drawable drawable = getResources().getDrawable(R.mipmap.usern);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userName.setCompoundDrawables(drawable,null, null, null);//画在左边
                         regist.setBackgroundResource(R.drawable.back_registn);
                         isname=false;
                     }else {
-                        regist.setBackgroundResource(R.drawable.back_btn);
+                        regist.setClickable(true);
+                        Drawable drawable = getResources().getDrawable(R.mipmap.users);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userName.setCompoundDrawables(drawable,null, null, null);//画在左边
+                        regist.setBackgroundResource(R.drawable.back_main);
                         isname=true;
                     }
                 }else {
+                    regist.setClickable(false);
                     if (s==null||s.equals("")){
+                        Drawable drawable = getResources().getDrawable(R.mipmap.usern);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userName.setCompoundDrawables(drawable,null, null, null);//画在左边
                         isname=false;
                     }else {
+                        Drawable drawable = getResources().getDrawable(R.mipmap.users);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userName.setCompoundDrawables(drawable,null, null, null);//画在左边
                         isname=true;
                     }
                     regist.setBackgroundResource(R.drawable.back_registn);
@@ -209,18 +246,39 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
             @Override
             public void afterTextChanged(Editable editable) {
                 String s = userPwd.getText().toString();
-                if (isname||isphone||isver){
+
+                if (drawables==null){
+                    drawables = getResources().getDrawable(R.mipmap.eyesn);
+                    drawables.setBounds(0, 0, drawables.getMinimumWidth(), drawables.getMinimumHeight());
+                }
+
+                if (isname&&isphone&&isver&&isrepwd){
                     if (s==null||s.equals("")){
+                        regist.setClickable(false);
+                        drawable = getResources().getDrawable(R.mipmap.passn);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userPwd.setCompoundDrawables(drawable,null, drawables, null);//画在左边
                         regist.setBackgroundResource(R.drawable.back_registn);
                         ispwd=false;
                     }else {
-                        regist.setBackgroundResource(R.drawable.back_btn);
+                        regist.setClickable(true);
+                        drawable = getResources().getDrawable(R.mipmap.passs);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userPwd.setCompoundDrawables(drawable,null, drawables, null);//画在左边
+                        regist.setBackgroundResource(R.drawable.back_main);
                         ispwd=true;
                     }
                 }else {
+                    regist.setClickable(false);
                     if (s==null||s.equals("")){
+                        drawable = getResources().getDrawable(R.mipmap.passn);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userPwd.setCompoundDrawables(drawable,null, drawables, null);//画在左边
                         ispwd=false;
                     }else {
+                        drawable = getResources().getDrawable(R.mipmap.passs);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userPwd.setCompoundDrawables(drawable,null, drawables, null);//画在左边
                         ispwd=true;
                     }
                     regist.setBackgroundResource(R.drawable.back_registn);
@@ -228,6 +286,60 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
 
             }
         });
+
+        rePwd.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String s = rePwd.getText().toString();
+                if (drawables==null){
+                    drawables = getResources().getDrawable(R.mipmap.eyesn);
+                    drawables.setBounds(0, 0, drawables.getMinimumWidth(), drawables.getMinimumHeight());
+                }
+                if (ispwd&&isname&&isver&&isphone){
+
+                    if (s==null||s.equals("")){
+                        regist.setClickable(false);
+                        drawable = getResources().getDrawable(R.mipmap.passn);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        rePwd.setCompoundDrawables(drawable,null, drawables, null);//画在左边
+                        regist.setBackgroundResource(R.drawable.back_registn);
+                        isrepwd=false;
+                    }else {
+                        regist.setClickable(true);
+                        drawable = getResources().getDrawable(R.mipmap.passs);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        rePwd.setCompoundDrawables(drawable,null, drawables, null);//画在左边
+                        regist.setBackgroundResource(R.drawable.back_main);
+                        isrepwd=true;
+                    }
+                }else {
+                    regist.setClickable(false);
+                    if (s==null||s.equals("")){
+                        drawable = getResources().getDrawable(R.mipmap.passn);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        rePwd.setCompoundDrawables(drawable,null, drawables, null);//画在左边
+                        isrepwd=false;
+                    }else {
+                        drawable = getResources().getDrawable(R.mipmap.passs);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        rePwd.setCompoundDrawables(drawable,null, drawables, null);//画在左边
+                        isrepwd=true;
+                    }
+                    regist.setBackgroundResource(R.drawable.back_registn);
+                }
+            }
+        });
+
         userPhone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -242,18 +354,33 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
             @Override
             public void afterTextChanged(Editable editable) {
                 String s = userPhone.getText().toString();
-                if (ispwd||isname||isver){
+                if (ispwd&&isname&&isver&&isrepwd){
                     if (s==null||s.equals("")){
+                        regist.setClickable(false);
+                        Drawable drawable = getResources().getDrawable(R.mipmap.phonen);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userPhone.setCompoundDrawables(drawable,null, null, null);//画在左边
                         regist.setBackgroundResource(R.drawable.back_registn);
                         isphone=false;
                     }else {
-                        regist.setBackgroundResource(R.drawable.back_btn);
+                        Drawable drawable = getResources().getDrawable(R.mipmap.phones);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userPhone.setCompoundDrawables(drawable,null, null, null);//画在左边
+                        regist.setClickable(true);
+                        regist.setBackgroundResource(R.drawable.back_main);
                         isphone=true;
                     }
                 }else {
+                    regist.setClickable(false);
                     if (s==null||s.equals("")){
+                        Drawable drawable = getResources().getDrawable(R.mipmap.phonen);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userPhone.setCompoundDrawables(drawable,null, null, null);//画在左边
                         isphone=false;
                     }else {
+                        Drawable drawable = getResources().getDrawable(R.mipmap.phones);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        userPhone.setCompoundDrawables(drawable,null, null, null);//画在左边
                         isphone=true;
                     }
                     regist.setBackgroundResource(R.drawable.back_registn);
@@ -275,18 +402,33 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
             @Override
             public void afterTextChanged(Editable editable) {
                 String s = verification.getText().toString();
-                if (ispwd||isname||isphone){
+                if (ispwd&&isname&&isphone&&isrepwd){
                     if (s==null||s.equals("")){
+                        regist.setClickable(false);
+                        Drawable drawable = getResources().getDrawable(R.mipmap.vern);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        verification.setCompoundDrawables(drawable,null, null, null);//画在左边
                         regist.setBackgroundResource(R.drawable.back_registn);
                         isver=false;
                     }else {
-                        regist.setBackgroundResource(R.drawable.back_btn);
+                        regist.setClickable(true);
+                        Drawable drawable = getResources().getDrawable(R.mipmap.vers);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        verification.setCompoundDrawables(drawable,null, null, null);//画在左边
+                        regist.setBackgroundResource(R.drawable.back_main);
                         isver=true;
                     }
                 }else {
+                    regist.setClickable(false);
                     if (s==null||s.equals("")){
+                        Drawable drawable = getResources().getDrawable(R.mipmap.vern);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        verification.setCompoundDrawables(drawable,null, null, null);//画在左边
                         isver=false;
                     }else {
+                        Drawable drawable = getResources().getDrawable(R.mipmap.vers);
+                        drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight()); //设置边界
+                        verification.setCompoundDrawables(drawable,null, null, null);//画在左边
                         isver=true;
                     }
                     regist.setBackgroundResource(R.drawable.back_registn);
@@ -299,6 +441,29 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
 
     }
 
+    private void showOrHide(EditText etPassword){
+        //记住光标开始的位置
+        int pos = etPassword.getSelectionStart();
+        if(etPassword.getInputType()!= (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)){//隐藏密码
+            drawables = getResources().getDrawable(R.mipmap.eyesn);
+            drawables.setBounds(0, 0, drawables.getMinimumWidth(), drawables.getMinimumHeight());
+            etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }else{//显示密码
+            drawables = getResources().getDrawable(R.mipmap.eyes);
+            drawables.setBounds(0, 0, drawables.getMinimumWidth(), drawables.getMinimumHeight());
+            etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }
+
+        if (drawable==null){
+            drawable = getResources().getDrawable(R.mipmap.passn);
+        }
+        etPassword.setCompoundDrawables(drawable,null, drawables, null);//画在左边
+        etPassword.setSelection(pos);
+
+    }
+
+
+
     @OnClick({R.id.login, R.id.idCart_one, R.id.idCart_two, R.id.idCart_three, R.id.get_verification, R.id.regist})
     public void onViewClicked(View view) {
         Intent intent;
@@ -307,7 +472,21 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
                 finish();
                 break;
             case R.id.get_verification:
-                handler.sendEmptyMessageDelayed(0,1000);
+                String phones = userPhone.getText().toString();
+                if (phones==null||phones.equals("")){
+                    Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (StringUtils.isRegistMobileNO(phones)){
+                    Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //提交服务器
+                Map<String,String> maps=new HashMap<>();
+                maps.put("mobile",phones);
+                maps.put("token",Constant.TOKEN);
+                beans = 0;
+                pressenter.sendMessage(RegistActivity.this,Constant.SendMessage,maps, Bean.class);
                 break;
             case R.id.regist:
 
@@ -316,7 +495,6 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
                         Toast.makeText(this, "请选择图片", Toast.LENGTH_SHORT).show();
                         return;
                     }
-
                 }
                 String name = userName.getText().toString();
                 String pwd = userPwd.getText().toString();
@@ -334,7 +512,7 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
                     Toast.makeText(this, "用户名格式错误", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (StringUtils.isRegistMobileNO(phone)){
+                if (StringUtils.isChinaPhoneLegal(phone)){
                     Toast.makeText(this, "手机号格式错误", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -342,7 +520,7 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
                     Toast.makeText(this, "密码格式错误", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (pwd.equals(respwd)){
+                if (!pwd.equals(respwd)){
                     Toast.makeText(this, "两次密码不一致", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -352,8 +530,60 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
                     return;
                 }
 
-                intent = new Intent(RegistActivity.this, MainActivity.class);
-                startActivity(intent);
+
+                if (type.equals("3")){
+                    Map<String,String> map=new HashMap<>();
+                    map.put("token",Constant.TOKEN);
+                    map.put("user_login",name);
+                    map.put("user_pass",pwd);
+                    map.put("re_pass",respwd);
+                    map.put("mobile",phone);
+                    map.put("code",verifications);
+                    map.put("type",type);
+                    beans = 1;
+                    pressenter.sendMessage(RegistActivity.this, Constant.UserRegist,map, Bean.class);
+                }else if (type.equals("2")){
+                    Map<String, File> files = new HashMap<>();
+                    Bitmap bitmap = null;
+                    try {
+                        bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(urione));
+                        files.put(bitmapToString(bitmap), new File(bitmapToString(bitmap)));
+                        bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uritwo));
+                        files.put(bitmapToString(bitmap), new File(bitmapToString(bitmap)));
+                        bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(urithree));
+                        files.put(bitmapToString(bitmap), new File(bitmapToString(bitmap)));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    OkHttpUtils.post().url(Constant.PATH + Constant.ShopRegist)
+                            .addParams("token", Constant.TOKEN)
+                            .addParams("user_login", name)
+                            .addParams("user_pass", pwd)
+                            .addParams("re_pass", respwd)
+                            .addParams("mobile", phone)
+                            .addParams("code", verifications)
+                            .addParams("type", type + "")
+                            .files("image[]", files)
+                            .build().execute(new ResultDetailCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Toast.makeText(RegistActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onResponse(Result response, int id) {
+                            if (response != null && response.getCode()==1) {
+                                Toast.makeText(RegistActivity.this, response.getMessage(), Toast.LENGTH_LONG).show();
+                                finish();
+                            } else if (response.getCode()==-2) {
+                                Toast.makeText(RegistActivity.this, "验证码不正确", Toast.LENGTH_SHORT).show();
+                            } else if (response.getCode()==-3) {
+                                Toast.makeText(RegistActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+
 
                 break;
             case R.id.idCart_one:
@@ -438,6 +668,18 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
             default:
         }
     }
+
+    public String bitmapToString(Bitmap bitmap) {
+        //将bitmap转换为uri
+        Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor actualimagecursor = managedQuery(uri, proj, null, null, null);
+        int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        actualimagecursor.moveToFirst();
+        String img_path = actualimagecursor.getString(actual_image_column_index);
+        return img_path;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Uri uri;
@@ -478,26 +720,38 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
         }
     }
 
-    private void showOrHide(EditText etPassword){
-        //记住光标开始的位置
-        int pos = etPassword.getSelectionStart();
-        if(etPassword.getInputType()!= (InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD)){//隐藏密码
-            etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        }else{//显示密码
-            etPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-        }
-        etPassword.setSelection(pos);
-
-    }
-
 
     @Override
     public void requesta(Object data) {
+        if (data instanceof Bean){
+            Bean bean= (Bean) data;
+            if (beans == 1){
+                if (bean.getCode()==1){
+                    Toast.makeText(this, bean.getMessage(), Toast.LENGTH_SHORT).show();
+                } else if (bean.getCode()==-3) {
+                    Toast.makeText(this, bean.getMessage(), Toast.LENGTH_SHORT).show();
+                } else if (bean.getCode()==-2) {
+                    Toast.makeText(this, bean.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }else {
+                if (bean.getCode()==1){
+                    handler.sendEmptyMessageDelayed(0,1000);
+                    Toast.makeText(this, bean.getMessage(), Toast.LENGTH_SHORT).show();
+                } else if (bean.getCode()==-3) {
+                    Toast.makeText(this, bean.getMessage(), Toast.LENGTH_SHORT).show();
+                } else if (bean.getCode()==-2) {
+                    Toast.makeText(this, bean.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
 
+
+            
+        }
+        
     }
 
     @Override
     public void fail(String error) {
-
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
 }

@@ -14,4 +14,8 @@
         <attr name="image_shadow" format="boolean" />//是否阴影
         <attr name="shadow_color" format="integer"/>//阴影颜色
     </declare-styleable>
+    <style name="CheckBoxTheme">
+        <item name="colorAccent">@color/main</item><!--选中颜色-->
+        <item name="colorControlNormal">@color/mainblack</item><!--未选中颜色-->
+    </style>
 </resources>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".view.mine.SettingActivity">
 
     <TextView
@@ -19,8 +20,8 @@
         android:id="@+id/back"
         android:layout_width="@dimen/dp_22"
         android:layout_height="@dimen/dp_31"
-        android:padding="@dimen/dp_5"
-        android:src="@mipmap/back_shop"
+        android:padding="@dimen/dp_2"
+        android:src="@mipmap/common_back"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_7"
         />
@@ -124,6 +125,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/edit_login"
         android:layout_width="@dimen/dp_310"
         android:layout_height="@dimen/dp_40"
         android:background="@drawable/back_btn"

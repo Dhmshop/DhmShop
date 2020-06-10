@@ -39,9 +39,15 @@ public class ClassificationChildFragment extends BaseFragment implements View.On
     protected int getLayout() {
         return R.layout.fragment_classification_child;
     }
-
     @Override
-    protected void initView(View view) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_classification_child, container, false);
+        }
+        return view;
+    }
+    @Override
+    protected void initView() {
 
         mTitleClassificationchild = (TextView) view.findViewById(R.id.title_classificationchild);
         mRecyclerviewClassificationchild = (RecyclerView) view.findViewById(R.id.recyclerview_classificationchild);

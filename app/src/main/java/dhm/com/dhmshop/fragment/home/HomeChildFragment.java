@@ -22,7 +22,7 @@ public class HomeChildFragment extends BaseFragment {
     }
 
     @Override
-    protected void initView(View view) {
+    protected void initView() {
 
     }
 

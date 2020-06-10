@@ -1,5 +1,7 @@
 package dhm.com.dhmshop.view.mine;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -13,8 +15,10 @@ public class AboutActivity extends BaseActiity {
         return R.layout.activity_about;
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected void initView() {
+        getWindow().setStatusBarColor(Color.LTGRAY);
 
     }
 

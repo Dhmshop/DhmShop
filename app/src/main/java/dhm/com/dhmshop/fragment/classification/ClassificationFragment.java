@@ -41,9 +41,15 @@ public class ClassificationFragment extends BaseFragment implements View.OnClick
     protected int getLayout() {
         return R.layout.fragment_classification;
     }
-
     @Override
-    protected void initView(View view) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_classification, container, false);
+        }
+        return view;
+    }
+    @Override
+    protected void initView() {
 
         mMainsearchClassfg = (LinearLayout) view.findViewById(R.id.mainsearch_classififg);
         mMainsearchClassfg.setOnClickListener(this);
