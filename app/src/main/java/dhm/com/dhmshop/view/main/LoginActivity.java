@@ -94,10 +94,10 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
         getWindow().setStatusBarColor(getResources().getColor(R.color.main));
 
         login.setClickable(false);
-//        if (uid!=null){
-//            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-//            startActivity(intent);
-//        }
+        if (uid!=null){
+            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
 
         userpwd.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -228,14 +228,6 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
 
     }
 
-    @SuppressLint("NewApi")
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//        getWindow().setNavigationBarColor(Color.parseColor("#aaddff"));
-    }
-
     private void showOrHide(EditText etPassword){
         //记住光标开始的位置
         int pos = etPassword.getSelectionStart();
@@ -322,7 +314,8 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
             if (userLogin.getCode()==1){
                 int uid = userLogin.getData().get(0).getUid();
                 SpUtils.saveString(LoginActivity.this,"uid",uid+"");
-                if (type.equals("2")){
+                SpUtils.saveString(LoginActivity.this,"userType",userLogin.getData().get(0).getUser_type()+"");
+                if (userLogin.getData().get(0).getUser_type()==2){
                     SpUtils.saveString(LoginActivity.this,"shop_id",userLogin.getData().get(0).getShop_id()+"");
                 }
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
@@ -340,4 +333,15 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
     public void fail(String error) {
         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
     }
+
+
+
+
+
+
+
+
+
+
+
 }

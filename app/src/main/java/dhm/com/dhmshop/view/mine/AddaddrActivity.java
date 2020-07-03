@@ -38,6 +38,8 @@ public class AddaddrActivity extends BaseActiity implements LoginContract.IView 
     TextView myaddress;
     @BindView(R.id.title)
     TextView title;
+    @BindView(R.id.del)
+    TextView del;
     @BindView(R.id.addrs)
     EditText addrs;
     @BindView(R.id.quan)
@@ -73,15 +75,19 @@ public class AddaddrActivity extends BaseActiity implements LoginContract.IView 
         aid = intent.getStringExtra("aid");
         uid = SpUtils.getString(this, "uid");
 
-        if (!aid.equals("no")) {
+        if (aid.equals("no")) {
+            del.setVisibility(View.GONE);
+            title.setText("添加收货地址");
+        }else if (aid.equals("xiu")){
+
+        }  else {
             title.setText("编辑收货地址");
+            del.setVisibility(View.VISIBLE);
             Map<String,String> map=new HashMap<>();
             map.put("token",Constant.TOKEN);
             map.put("uid",uid);
             map.put("aid", aid);
             pressenter.sendMessage(this,Constant.GetAddress,map, GetAddr.class);
-        }else {
-            title.setText("添加收货地址");
         }
 
     }
@@ -128,13 +134,22 @@ public class AddaddrActivity extends BaseActiity implements LoginContract.IView 
     }
 
 
-    @OnClick({R.id.back, R.id.about, R.id.quan, R.id.sure})
+    @OnClick({R.id.back, R.id.about, R.id.quan,  R.id.del, R.id.sure})
     public void onViewClicked(View view) {
+        Map<String,String> map;
         switch (view.getId()) {
             case R.id.back:
+                finish();
                 break;
             case R.id.about:
                 selectAddress();
+                break;
+            case R.id.del:
+                map=new HashMap<>();
+                map.put("token",Constant.TOKEN);
+                map.put("aid",aid);
+                map.put("uid",uid);
+                pressenter.sendMessage(AddaddrActivity.this,Constant.DelAddress,map,Bean.class);
                 break;
             case R.id.quan:
                 if (isDef){
@@ -162,7 +177,7 @@ public class AddaddrActivity extends BaseActiity implements LoginContract.IView 
                     return;
                 }
 
-                Map<String,String> map=new HashMap<>();
+                map=new HashMap<>();
                 map.put("token", Constant.TOKEN);
                 map.put("uid",uid);
                 map.put("user_name",names);

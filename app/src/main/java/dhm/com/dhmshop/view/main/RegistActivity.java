@@ -72,6 +72,8 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
     EditText verification;
     @BindView(R.id.get_verification)
     TextView getVerification;
+    @BindView(R.id.title)
+    TextView title;
     @BindView(R.id.agree)
     CheckBox agree;
     @BindView(R.id.regist)
@@ -140,11 +142,14 @@ public class RegistActivity extends BaseActiity implements LoginContract.IView {
     protected void initData() {
         type = getIntent().getStringExtra("type");
         if (type.equals("3")){
+            title.setText("免费用户注册");
             lineCus.setVisibility(View.GONE);
         }else if (type.equals("2")){
+            title.setText("免费商家注册");
             lineCus.setVisibility(View.VISIBLE);
         }else {
-            type="1";
+            type="3";
+            title.setText("免费用户注册");
             lineCus.setVisibility(View.GONE);
         }
 

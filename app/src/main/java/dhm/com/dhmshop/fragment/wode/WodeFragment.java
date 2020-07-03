@@ -27,11 +27,16 @@ import dhm.com.dhmshop.base.LazyLoadFragment;
 import dhm.com.dhmshop.base.Presenter.PressenterImpl;
 import dhm.com.dhmshop.base.netWork.Constant;
 import dhm.com.dhmshop.base.netWork.LoginContract;
+import dhm.com.dhmshop.entity.GetUserInfo;
 import dhm.com.dhmshop.entity.UserLogin;
 import dhm.com.dhmshop.utils.SpUtils;
 import dhm.com.dhmshop.view.mine.AddressActivity;
+import dhm.com.dhmshop.view.mine.CollectionActivity;
+import dhm.com.dhmshop.view.mine.MyfootActivity;
 import dhm.com.dhmshop.view.mine.MyinfoActivity;
+import dhm.com.dhmshop.view.mine.MyorderActivity;
 import dhm.com.dhmshop.view.mine.SettingActivity;
+import dhm.com.dhmshop.view.mine.myshop.MyshopActivity;
 
 
 /**
@@ -51,6 +56,7 @@ public class WodeFragment extends LazyLoadFragment implements LoginContract.IVie
 
     private PressenterImpl pressenter;
     private String uid;
+    private String userType;
 
     public WodeFragment() {
         // Required empty public constructor
@@ -60,14 +66,20 @@ public class WodeFragment extends LazyLoadFragment implements LoginContract.IVie
         pressenter=new PressenterImpl();
         pressenter.attachView(this);
         uid = SpUtils.getString(getActivity(), "uid");
-
+        userType = SpUtils.getString(getActivity(), "userType");
+        if (userType.equals("2")){
+            myshop.setVisibility(View.VISIBLE);
+        }else {
+            myshop.setVisibility(View.GONE);
+        }
+        initData();
     }
 
     protected void initData() {
         Map<String,String> map=new HashMap<>();
         map.put("token",Constant.TOKEN);
-        map.put("id",uid);
-        pressenter.sendMessage(getActivity(), Constant.GetUserInfo,map, UserLogin.class);
+        map.put("uid",uid);
+        pressenter.sendMessage(getActivity(), Constant.GetUserInfo,map, GetUserInfo.class);
 
     }
     @Override
@@ -108,16 +120,33 @@ public class WodeFragment extends LazyLoadFragment implements LoginContract.IVie
                 getActivity().startActivity(intent);
                 break;
             case R.id.allorder:
+                intent=new Intent(getActivity(), MyorderActivity.class);
+                intent.putExtra("type","0");
+                getActivity().startActivity(intent);
                 break;
             case R.id.topay:
+                intent=new Intent(getActivity(), MyorderActivity.class);
+                intent.putExtra("type","1");
+                getActivity().startActivity(intent);
                 break;
             case R.id.togo:
+                intent=new Intent(getActivity(), MyorderActivity.class);
+                intent.putExtra("type","2");
+                getActivity().startActivity(intent);
                 break;
             case R.id.geted:
+                intent=new Intent(getActivity(), MyorderActivity.class);
+                intent.putExtra("type","3");
+                getActivity().startActivity(intent);
                 break;
             case R.id.toping:
+                intent=new Intent(getActivity(), MyorderActivity.class);
+                intent.putExtra("type","4");
+                getActivity().startActivity(intent);
                 break;
             case R.id.myshop:
+                intent=new Intent(getActivity(), MyshopActivity.class);
+                getActivity().startActivity(intent);
                 break;
             case R.id.valuation:
                 break;
@@ -126,14 +155,20 @@ public class WodeFragment extends LazyLoadFragment implements LoginContract.IVie
                 getActivity().startActivity(intent);
                 break;
             case R.id.favorite:
+                intent=new Intent(getActivity(), CollectionActivity.class);
+                getActivity().startActivity(intent);
                 break;
             case R.id.footer:
+                intent=new Intent(getActivity(), MyfootActivity.class);
+                getActivity().startActivity(intent);
                 break;
             case R.id.address:
                 intent =new Intent(getActivity(), AddressActivity.class);
                 getActivity().startActivity(intent);
                 break;
             case R.id.setLogin:
+                intent=new Intent(getActivity(), SettingActivity.class);
+                getActivity().startActivity(intent);
                 break;
             default:
         }
@@ -141,12 +176,12 @@ public class WodeFragment extends LazyLoadFragment implements LoginContract.IVie
 
     @Override
     public void requesta(Object data) {
-        if (data instanceof UserLogin){
-            UserLogin userLogin= (UserLogin) data;
+        if (data instanceof GetUserInfo){
+            GetUserInfo userLogin= (GetUserInfo) data;
             if (userLogin.getCode()==1){
-                name.setText(userLogin.getData().get(0).getUser_nickname());
-                mineHead.setImageURI("http://app.jzcto.com"+userLogin.getData().get(0).getHeadsmall());
-                if (userLogin.getData().get(0).getUser_type()==2){
+                name.setText(userLogin.getData().getUser_nickname());
+                mineHead.setImageURI(Constant.PATH+userLogin.getData().getHeadsmall());
+                if (userLogin.getData().getUser_type()==2){
                     myshop.setVisibility(View.VISIBLE);
                 }else {
                     myshop.setVisibility(View.GONE);
