@@ -259,13 +259,10 @@ public class ForgetPwdActivity extends BaseActiity implements LoginContract.IVie
             }
         }else if (data instanceof Bean){
             Bean bean= (Bean) data;
+            Toast.makeText(this, bean.getMessage(), Toast.LENGTH_SHORT).show();
             if (bean.getCode()==1){
+                djs=60;
                 handler.sendEmptyMessageDelayed(0,1000);
-                Toast.makeText(this, bean.getMessage(), Toast.LENGTH_SHORT).show();
-            } else if (bean.getCode()==-3) {
-                Toast.makeText(this, bean.getMessage(), Toast.LENGTH_SHORT).show();
-            } else if (bean.getCode()==-2) {
-                Toast.makeText(this, bean.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }

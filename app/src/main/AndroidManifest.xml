@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".view.App"
@@ -15,10 +16,27 @@
         android:supportsRtl="true"
         android:theme="@style/TranslucentTheme"
         tools:replace="android:theme">
-        <activity android:name=".view.mine.JsActivity"></activity>
+        <activity android:name=".view.mine.myshop.WithdrawalActivity"></activity>
+        <activity android:name=".view.mine.order.LogisticsActivity" />
+        <activity android:name=".view.mine.order.ShowevaluateActivity" />
+        <activity android:name=".adapter.mine.EvaluateActivity" />
+        <activity android:name=".view.mine.myshop.SeecuiActivity" />
+        <activity android:name=".view.mine.MyfootActivity" />
+        <activity android:name=".view.mine.CollectionActivity" />
+        <activity android:name=".view.mine.MyorderActivity" />
+        <activity android:name=".view.mine.myshop.ShopdetailActivity" />
+        <activity android:name=".view.mine.QuanActivity" />
+        <activity android:name=".view.mine.PhoneActivity" />
+        <activity android:name=".view.mine.myshop.AddadActivity" />
+        <activity android:name=".view.main.MainActivity" />
+        <activity android:name=".view.mine.myshop.ShopsettingActivity" />
+        <activity android:name=".view.mine.myshop.EditShopActivity" />
+        <activity android:name=".view.mine.myshop.ShowshopActivity" />
+        <activity android:name=".view.mine.myshop.MyshopActivity" />
+        <activity android:name=".view.mine.JsActivity" />
         <activity android:name=".view.mine.SafeActivity" />
         <activity android:name=".view.mine.MyinfoActivity" />
-        <activity android:name=".view.main.SearchActivity"></activity>
+        <activity android:name=".view.main.SearchActivity" />
         <activity android:name=".view.mine.AddaddrActivity" />
         <activity android:name=".view.mine.AddressActivity" />
         <activity android:name=".view.mine.AboutActivity" />
@@ -27,7 +45,7 @@
         <activity android:name=".view.main.ForgetPwdActivity" />
         <activity android:name=".view.main.RegistActivity" />
         <activity android:name=".view.welcome.WelcomeActivity" />
-        <activity android:name=".view.main.MainActivity" />
+        <activity android:name=".view.main.CalenderActivity" />
         <activity android:name=".view.main.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +53,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="dhm.com.dhmshop.fileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

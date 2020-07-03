@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -48,18 +49,12 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     @Override
     protected void initView() {
 
-        getWindow().setStatusBarColor(Color.LTGRAY);
         getWindow().setNavigationBarColor(Color.BLACK);
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
         mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
         mMainContainer = (LinearLayout) findViewById(R.id.main_container);
         mMainVp.setOnClickListener(this);
         mMainTablayout.setOnClickListener(this);
-
-
-        mMainVp = (ViewPager) findViewById(R.id.main_vp);
-        mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
-        mMainContainer = (LinearLayout) findViewById(R.id.main_container);
 
         mMainTablayout.setSelectedTabIndicatorHeight(0);
         //创建tab
@@ -91,6 +86,38 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
 
         setupTabIcons();//设置底部TabLayout的item
 
+        mMainTablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+
+                switch (position){
+                    case 0:
+                        getWindow().setStatusBarColor(Color.LTGRAY);
+                        break;
+                    case 1:
+                        getWindow().setStatusBarColor(Color.LTGRAY);
+                        break;
+                    case 2:
+                        getWindow().setStatusBarColor(Color.LTGRAY);
+                        break;
+                    case 3:
+                        getWindow().setStatusBarColor(getResources().getColor(R.color.main));
+                        break;
+                    default:
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
 
 
@@ -116,28 +143,6 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         ImageView iv = (ImageView) tabitem.findViewById(R.id.tabiv);
         TextView tv = (TextView) tabitem.findViewById(R.id.tabtv);
         tv.setText(titles.get(position));
-
-       /* if (position == 0) {
-            nav_title.setTextColor(getResources().getColor(R.color.colorPrimary));
-            nav_icon.setTextColor(getResources().getColor(R.color.colorPrimary));
-        } else {
-            nav_title.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
-            nav_icon.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
-        }*/
-
-
-       switch (position){
-           case 0:
-           case 1:
-           case 2:
-               getWindow().setStatusBarColor(Color.LTGRAY);
-               break;
-           case 3:
-               getWindow().setStatusBarColor(getResources().getColor(R.color.main));
-               break;
-           default:
-       }
-
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.drawable.selector_show);
         images.add(R.drawable.selector_classification);
@@ -161,6 +166,32 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         }
     }
 
+
+
+
+
+
+
+    /**
+     * 防止误触退出
+     */
+    private long mExitTime;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+
+            } else {
+                finish();
+            }
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
 
 
 }

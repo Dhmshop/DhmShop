@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:background="@color/white"
     tools:context=".view.mine.AboutActivity">
 
@@ -19,8 +20,8 @@
         android:id="@+id/back"
         android:layout_width="@dimen/dp_22"
         android:layout_height="@dimen/dp_31"
-        android:padding="@dimen/dp_5"
-        android:src="@mipmap/back_shop"
+        android:padding="@dimen/dp_3"
+        android:src="@mipmap/common_back"
         android:layout_marginLeft="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_7"
         />

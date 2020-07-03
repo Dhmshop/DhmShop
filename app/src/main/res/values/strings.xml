@@ -1,9 +1,48 @@
 <resources>
 
-    <string name="app_name">郡之城</string>
+    <string name="app_name">奇通商城</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="permission_get_accounts_hint">没有此权限，无法开启这个功能，请开启权限。PERMISSION_GET_ACCOUNTS</string>
+    <string name="permission_read_phone_hint">读取手机权限</string>
+    <string name="permission_call_phone_hint">请打开电话权限</string>
+    <string name="permission_camera_hint">请打开拍照权限</string>
+    <string name="permission_access_fine_location_hint">请打开位置信息，提供定位信息</string>
+    <string name="permission_access_coarse_location_hint">请打开位置信息，提供定位信息</string>
+    <string name="permission_read_external_hint">请允许读取SD卡</string>
+    <string name="permission_white_external_hint">请允许读写SD卡</string>
+    <string name="permission_recode_audio_hint">请打开录音权限</string>
+    <string name="permission_bluetooth_hint">请打开蓝牙权限</string>
+
+
+    <string name="mis_folder_all">所有照片</string>
+    <string name="mis_preview">预览</string>
+    <string name="mis_msg_no_camera">没有系统相机</string>
+    <string name="mis_msg_amount_limit">已经达到最高选择数量</string>
+    <string name="mis_action_done">完成</string>
+    <string name="mis_photo_unit">张</string>
+    <string name="mis_tip_take_photo">拍摄照片</string>
+    <string name="mis_error_image_not_exist">图片错误</string>
+    <string name="mis_error_no_permission">无权限</string>
+    <string name="mis_permission_dialog_title">权限拒绝</string>
+    <string name="mis_permission_dialog_ok">好</string>
+    <string name="mis_permission_dialog_cancel">拒绝</string>
+    <string name="mis_permission_rationale">浏览图片需要您提供浏览存储的权限</string>
+    <string name="mis_permission_rationale_write_storage">保存拍照图片需要您提供写存储权限</string>
+
+    <string-array name="permissions">
+        <item>@string/permission_recode_audio_hint</item>
+        <item>@string/permission_get_accounts_hint</item>
+        <item>@string/permission_read_phone_hint</item>
+        <item>@string/permission_call_phone_hint</item>
+        <item>@string/permission_camera_hint</item>
+        <item>@string/permission_access_fine_location_hint</item>
+        <item>@string/permission_access_coarse_location_hint</item>
+        <item>@string/permission_read_external_hint</item>
+        <item>@string/permission_white_external_hint</item>
+        <item>@string/permission_bluetooth_hint</item>
+    </string-array>
 
 </resources>
