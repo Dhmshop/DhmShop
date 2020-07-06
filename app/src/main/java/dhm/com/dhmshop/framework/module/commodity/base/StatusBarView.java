@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package dhm.com.dhmshop.framework.module.commodity.base;
 
 import android.content.Context;
 import android.util.AttributeSet;

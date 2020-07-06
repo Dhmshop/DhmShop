@@ -1,5 +1,9 @@
-package dhm.com.dhmshop.module.home.entity;
+package dhm.com.dhmshop.framework.module.home.entity;
 
+
+/**
+ * 首页头条资讯
+ */
 public class TopNewsEntity {
     /**
      * id : 1

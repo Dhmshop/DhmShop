@@ -1,4 +1,4 @@
-package com.demo.www.db;
+package dhm.com.dhmshop.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

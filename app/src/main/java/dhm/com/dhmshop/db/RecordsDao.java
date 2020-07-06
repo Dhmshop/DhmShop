@@ -1,4 +1,4 @@
-package com.demo.www.db;
+package dhm.com.dhmshop.db;
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;

@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.module.home.model;
+package dhm.com.dhmshop.framework.module.home.model;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import dhm.com.dhmshop.framework.base.BaseModel;
 import dhm.com.dhmshop.framework.network.OnSuccessAndFaultListener;
 import dhm.com.dhmshop.framework.network.OnSuccessAndFaultSub;
 import dhm.com.dhmshop.framework.utils.ToastUtil;
-import dhm.com.dhmshop.module.home.entity.TabCategoryEntity;
-import dhm.com.dhmshop.module.home.view.HomeView;
+import dhm.com.dhmshop.framework.module.home.entity.TabCategoryEntity;
+import dhm.com.dhmshop.framework.module.home.view.HomeView;
 
 public class HomeModel extends BaseModel<HomeView> {
     /**

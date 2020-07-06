@@ -1,5 +1,9 @@
-package dhm.com.dhmshop.module.home.entity;
+package dhm.com.dhmshop.framework.module.home.entity;
 
+
+/**
+ * 获取首页tab栏
+ */
 public class TabCategoryEntity {
     /**
      * id : 1

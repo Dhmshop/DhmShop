@@ -1,5 +1,8 @@
-package dhm.com.dhmshop.module.home.entity;
+package dhm.com.dhmshop.framework.module.home.entity;
 
+/**
+ * 首页销量排前的商品
+ */
 public class HomeHotGoodsList {
     /**
      * goods_id : 1

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package dhm.com.dhmshop.framework.module.commodity.base;
 /**
  * 圆形控件，显示头像
  * by黄海杰 at：2015-4-7
@@ -20,12 +20,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.ColorInt;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
+
+
+import dhm.com.dhmshop.R;
 
 
 @SuppressLint("AppCompatCustomView")

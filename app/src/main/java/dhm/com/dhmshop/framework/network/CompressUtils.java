@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.fromwork.network;
+package dhm.com.dhmshop.framework.network;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

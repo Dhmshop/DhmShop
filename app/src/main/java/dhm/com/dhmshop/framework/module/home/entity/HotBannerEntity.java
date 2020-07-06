@@ -1,7 +1,10 @@
-package dhm.com.dhmshop.module.home.entity;
+package dhm.com.dhmshop.framework.module.home.entity;
 
 import java.util.List;
 
+/**
+ * 首页大图广告
+ */
 public class HotBannerEntity {
 
     /**

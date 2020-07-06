@@ -1,14 +1,14 @@
-package dhm.com.dhmshop.module.home.view;
+package dhm.com.dhmshop.framework.module.home.view;
 
 import java.util.List;
 
 import dhm.com.dhmshop.framework.base.BaseView;
-import dhm.com.dhmshop.module.home.entity.EliteGoodsEntity;
-import dhm.com.dhmshop.module.home.entity.HomeHotGoodsList;
-import dhm.com.dhmshop.module.home.entity.HotBannerEntity;
-import dhm.com.dhmshop.module.home.entity.HotGoodsEntity;
-import dhm.com.dhmshop.module.home.entity.RecommendShopEntity;
-import dhm.com.dhmshop.module.home.entity.TopNewsEntity;
+import dhm.com.dhmshop.framework.module.home.entity.EliteGoodsEntity;
+import dhm.com.dhmshop.framework.module.home.entity.HomeHotGoodsList;
+import dhm.com.dhmshop.framework.module.home.entity.HotBannerEntity;
+import dhm.com.dhmshop.framework.module.home.entity.HotGoodsEntity;
+import dhm.com.dhmshop.framework.module.home.entity.RecommendShopEntity;
+import dhm.com.dhmshop.framework.module.home.entity.TopNewsEntity;
 
 public interface HomeHotView extends BaseView {
     void getBannerSuccess(HotBannerEntity bannerEntity);

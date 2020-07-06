@@ -1,27 +1,19 @@
-package dhm.com.dhmshop.fromwork.base;
+package dhm.com.dhmshop.framework.base;
 
 
 import android.content.Context;
 
-
 public class BaseInfo<T> {
-
-    /**
-     * ret : 200
-     * data : {"user_id":4318,"token":"c0dda436647e3e8c7344a33a03377c1f"}
-     * msg :
-     */
-
-    private int ret;
+    private int code;
     private T data;
-    private String msg;
+    private String message;
 
-    public int getRet() {
-        return ret;
+    public int getCode() {
+        return code;
     }
 
-    public void setRet(int ret) {
-        this.ret = ret;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public T getData() {
@@ -32,12 +24,12 @@ public class BaseInfo<T> {
         this.data = data;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public boolean isSuccess(Context context){
@@ -47,16 +39,7 @@ public class BaseInfo<T> {
         if (data instanceof String && data.equals("")){
             return false;
         }
-
-        if (ret == 401){
-            return false;
-        }
-        if (ret == 200){
-            return true;
-        }else {
-            return false;
-        }
-
+        return true;
     }
 
 }

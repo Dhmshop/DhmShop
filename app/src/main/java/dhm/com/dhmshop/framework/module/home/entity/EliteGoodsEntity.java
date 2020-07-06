@@ -1,5 +1,8 @@
-package dhm.com.dhmshop.module.home.entity;
+package dhm.com.dhmshop.framework.module.home.entity;
 
+/**
+ * 首页有好货的商品（获取单个商品）
+ */
 public class EliteGoodsEntity {
     /**
      * goods_id : 4

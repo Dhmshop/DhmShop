@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/topnews"
+    android:orientation="horizontal">
+
+
+
+    <TextView
+        android:id="@+id/remen"
+        android:layout_width="@dimen/dp_27"
+        android:layout_height="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_5"
+        android:gravity="center"
+        android:text="热门"
+        android:textColor="#FF4A33"
+        android:background="@drawable/home_topnews"
+        android:textSize="@dimen/sp_10" />
+
+    <TextView
+        android:id="@+id/zixuntitle"
+        android:textColor="#222222"
+        android:textSize="@dimen/sp_13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

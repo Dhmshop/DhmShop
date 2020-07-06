@@ -94,10 +94,10 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
         getWindow().setStatusBarColor(getResources().getColor(R.color.main));
 
         login.setClickable(false);
-//        if (uid!=null){
-//            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-//            startActivity(intent);
-//        }
+        if (uid!=null){
+            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
 
         userpwd.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -301,6 +301,7 @@ public class LoginActivity extends BaseActiity implements LoginContract.IView {
                 map.put("user_pass",pwd);
                 map.put("user_type",type);
                 pressenter.sendMessage(LoginActivity.this,Constant.LOGIN,map, UserLogin.class);
+
                 break;
             case R.id.regist:
                 intent = new Intent(LoginActivity.this, RegistActivity.class);

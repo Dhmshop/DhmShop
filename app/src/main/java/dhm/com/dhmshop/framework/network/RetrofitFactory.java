@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.fromwork.network;
+package dhm.com.dhmshop.framework.network;
 
 
 import android.util.Log;
@@ -9,10 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import dhm.com.dhmshop.fromwork.base.BaseConstant;
-import dhm.com.dhmshop.fromwork.base.HttpApi;
-import dhm.com.dhmshop.fromwork.base.LenientGsonConverterFactory;
-import dhm.com.dhmshop.fromwork.base.URLConstant;
+import dhm.com.dhmshop.base.netWork.Constant;
+import dhm.com.dhmshop.framework.base.BaseConstant;
+import dhm.com.dhmshop.framework.base.HttpApi;
+import dhm.com.dhmshop.framework.base.LenientGsonConverterFactory;
+import dhm.com.dhmshop.framework.base.URLConstant;
 import dhm.com.dhmshop.view.App;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -32,14 +33,14 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 /**
- * Created by wjw on 2018/3/27.
+ * Created by  on 2018/3/27.
  * 封装Retrofit配置
  */
 
 public class RetrofitFactory {
     public String TAG = "RetrofitFactory";
     private static final String CACHE_NAME = "com.tortoise.merchant";
-    private static String BASE_URL = URLConstant.BASE_URL;
+    private static String BASE_URL = Constant.PATH;
     private static final int DEFAULT_CONNECT_TIMEOUT = 30;
     private static final int DEFAULT_WRITE_TIMEOUT = 30;
     private static final int DEFAULT_READ_TIMEOUT = 30;
@@ -99,10 +100,8 @@ public class RetrofitFactory {
             public Response intercept(Chain chain) throws IOException {
                 Request originalRequest = chain.request();
                 HttpUrl url=chain.request().url().newBuilder()
-                        .addQueryParameter("token", BaseConstant.TOKEN)
-                        .addQueryParameter("user_id",  BaseConstant.ID)
-                        .addQueryParameter("language_code",  BaseConstant.LANGUAGE)
-                        .addQueryParameter("currency_code",  BaseConstant.CURRENCY)
+                        .addQueryParameter("token", Constant.TOKEN)
+                        .addQueryParameter("uid",  BaseConstant.ID)
                         .build();
                 Request.Builder requestBuilder = originalRequest.newBuilder()
 //                        .addHeader("Accept-Encoding", "gzip")
@@ -124,8 +123,8 @@ public class RetrofitFactory {
                         String value = formBody.value(i);
                         builder.add(name, value);
                     }
-                    builder.add("token", BaseConstant.TOKEN);
-                    builder.add("user_id", BaseConstant.ID);
+                    builder.add("token", Constant.TOKEN);
+                    builder.add("uid", BaseConstant.ID);
                     formBody = builder.build();
                     //重新构建 request
                     Request request = requestBuilder

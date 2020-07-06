@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragment.classification.ClassificationChildFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/title_classificationchild"
+        android:id="@+id/title_typechild"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_30"
@@ -18,9 +18,11 @@
         android:textSize="@dimen/sp_18" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_classificationchild"
+        android:id="@+id/recyclerview_typechild"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:spanCount="2"
         android:layout_margin="@dimen/dp_30" />
 
 </LinearLayout>

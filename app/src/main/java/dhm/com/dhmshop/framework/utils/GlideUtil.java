@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.fromwork.utils;
+package dhm.com.dhmshop.framework.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.io.File;
 
 import dhm.com.dhmshop.R;
+import dhm.com.dhmshop.base.netWork.Constant;
 import jp.wasabeef.glide.transformations.BitmapTransformation;
 import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.CropTransformation;
@@ -74,7 +75,7 @@ public class GlideUtil extends AppGlideModule {
      */
     public static void loadImage(Context context, Object obj, ImageView imageView) {
         if (obj instanceof String) {
-            Glide.with(context).load(obj)
+            Glide.with(context).load(Constant.PATH + obj)
                     .apply(initOptions())
                     .error(getErrorImage())
                     .fallback(getErrorImage())
@@ -114,7 +115,7 @@ public class GlideUtil extends AppGlideModule {
      */
     public static void loadImage(Context context, Object obj, ImageView imageView, int errorImage) {
         if (obj instanceof String) {
-            Glide.with(context).load(obj)
+            Glide.with(context).load(Constant.PATH + obj)
                     .apply(initOptions())
                     .error(errorImage)
                     .fallback(errorImage)
@@ -318,7 +319,7 @@ public class GlideUtil extends AppGlideModule {
      */
     private static @DrawableRes
     int getErrorImage(){
-        return R.mipmap.ic_launcher;
+        return R.mipmap.zwt;
     }
 
     /**
@@ -326,7 +327,7 @@ public class GlideUtil extends AppGlideModule {
      * @describe 当图片没有加载出来的时候显示
      */
     private static @DrawableRes int getPlaceholder(){
-        return R.mipmap.ic_launcher;
+        return R.mipmap.zwt;
     }
 
     /**

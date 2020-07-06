@@ -1,11 +1,11 @@
-package dhm.com.dhmshop.module.home.model;
+package dhm.com.dhmshop.framework.module.home.model;
 
 import dhm.com.dhmshop.framework.base.BaseModel;
 import dhm.com.dhmshop.framework.network.OnSuccessAndFaultListener;
 import dhm.com.dhmshop.framework.network.OnSuccessAndFaultSub;
 import dhm.com.dhmshop.framework.utils.ToastUtil;
-import dhm.com.dhmshop.module.home.entity.CategoryTypeGoodsEntity;
-import dhm.com.dhmshop.module.home.view.HomeCategoryTypeView;
+import dhm.com.dhmshop.framework.module.home.entity.CategoryTypeGoodsEntity;
+import dhm.com.dhmshop.framework.module.home.view.HomeCategoryTypeView;
 
 public class HomeCategoryTypeModel extends BaseModel<HomeCategoryTypeView> {
     /**

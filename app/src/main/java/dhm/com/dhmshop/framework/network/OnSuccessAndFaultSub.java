@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.fromwork.network;
+package dhm.com.dhmshop.framework.network;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
 
 import javax.net.ssl.SSLHandshakeException;
 
-import dhm.com.dhmshop.fromwork.base.BaseInfo;
+import dhm.com.dhmshop.framework.base.BaseInfo;
 import io.reactivex.observers.DisposableObserver;
 import retrofit2.HttpException;
 
@@ -168,7 +168,7 @@ public class OnSuccessAndFaultSub<T> extends DisposableObserver<BaseInfo<T>>
         if (body.isSuccess(context)) {
             mOnSuccessAndFaultListener.onSuccess(body.getData());
         } else {
-            mOnSuccessAndFaultListener.onFault(body.getMsg());
+            mOnSuccessAndFaultListener.onFault(body.getMessage());
         }
     }
 

@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.fromwork.utils;
+package dhm.com.dhmshop.framework.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;

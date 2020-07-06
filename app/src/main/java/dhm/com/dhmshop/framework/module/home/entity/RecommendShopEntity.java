@@ -1,5 +1,9 @@
-package dhm.com.dhmshop.module.home.entity;
+package dhm.com.dhmshop.framework.module.home.entity;
 
+
+/**
+ * 首页每日好店
+ */
 public class RecommendShopEntity {
     /**
      * store_name : 新蕾女装

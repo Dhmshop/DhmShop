@@ -1,5 +1,10 @@
-package dhm.com.dhmshop.module.home.entity;
+package dhm.com.dhmshop.framework.module.home.entity;
 
+
+/**
+ *
+ * 首页热门的商品(单个商品)
+ */
 public class HotGoodsEntity {
     /**
      * goods_id : 5

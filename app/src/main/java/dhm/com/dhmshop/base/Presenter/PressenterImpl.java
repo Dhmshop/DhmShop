@@ -1,6 +1,7 @@
 package dhm.com.dhmshop.base.Presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,24 @@ public class PressenterImpl extends BasePresenter<LoginContract.IView> {
                     @Override
                     public void CallBack(Object data) {
                         getView().requesta(data);
+                    }
+
+                    @Override
+                    public void fail(String error) {
+                        getView().fail(error);
+                    }
+                }
+        );
+    }
+
+
+    public void getoneCategory(Context context, String path, Map<String, String> map, Class clazz) {
+
+        model.getoneCategory(context, path, map, clazz, new LoginContract.MyCallBack() {
+                    @Override
+                    public void CallBack(Object data) {
+                        getView().requesta(data);
+
                     }
 
                     @Override

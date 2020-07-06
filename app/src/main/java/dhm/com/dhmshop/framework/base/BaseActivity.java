@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.fromwork.base;
+package dhm.com.dhmshop.framework.base;
 
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -12,11 +12,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.gyf.immersionbar.ImmersionBar;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import dhm.com.dhmshop.fromwork.network.NetworkChange;
-import dhm.com.dhmshop.fromwork.utils.NetUtil;
-import dhm.com.dhmshop.fromwork.utils.ToastUtil;
+import dhm.com.dhmshop.R;
+import dhm.com.dhmshop.framework.network.NetworkChange;
+import dhm.com.dhmshop.framework.utils.NetUtil;
+import dhm.com.dhmshop.framework.utils.ToastUtil;
 
 /**
  * @date 2020/4/1
@@ -44,11 +47,11 @@ public abstract class BaseActivity<M extends BaseModel> extends AppCompatActivit
         }
 //        if (!EventBus.getDefault().isRegistered(this))
 //            EventBus.getDefault().register(this);
-      /*  ImmersionBar.with(this)
-                .navigationBarColor(R.color.textColor_white)
+        ImmersionBar.with(this)
+                .navigationBarColor(R.color.white)
                 .navigationBarAlpha(0.4f)//导航栏透明度，不写默认0.0F
                 .keyboardEnable(true)////解决软键盘与底部输入框冲突问题
-                .init();*/
+                .init();
         //初始化控件
         initView();
         if (NetUtil.getAPNType(this) ==  NetUtil.netType.noneNet){

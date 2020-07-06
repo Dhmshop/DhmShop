@@ -1,35 +1,50 @@
-package dhm.com.dhmshop.framework.module.home.fragment;
+package dhm.com.dhmshop.framework.module.type.fragment;
 
-import android.os.Bundle;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import dhm.com.dhmshop.R;
 import dhm.com.dhmshop.framework.base.BaseFragment;
-import dhm.com.dhmshop.framework.module.home.model.ClassIficationModel;
-import dhm.com.dhmshop.framework.module.home.view.ClassIficationView;
+import dhm.com.dhmshop.framework.module.home.entity.TabCategoryEntity;
+import dhm.com.dhmshop.framework.module.home.model.HomeModel;
+import dhm.com.dhmshop.framework.module.home.view.HomeView;
+import dhm.com.dhmshop.framework.utils.StringUtil;
+import io.reactivex.annotations.Nullable;
 import q.rorbin.verticaltablayout.VerticalTabLayout;
 
-public class ClassIficationFragment extends BaseFragment<ClassIficationModel> implements ClassIficationView {
+public class ClassIficationFragment extends BaseFragment<HomeModel> implements HomeView {
     private View view;
-    private LinearLayout mMainsearchClassififg;
-    private VerticalTabLayout mTabClassificationfg;
-    private ViewPager mVpClassificationfg;
+
+    private List<TabCategoryEntity> typeEntities;
+    private List<Fragment> fragments;
+    private ClassIficationVpFgAdapter classificationVpFgAdapter;
 
     @Override
     protected void initView(View inflate) {
 
-        mMainsearchClassififg = findViewById(R.id.mainsearch_classififg);
-        mTabClassificationfg = findViewById(R.id.tab_classificationfg);
-        mVpClassificationfg = findViewById(R.id.vp_classificationfg);
+        LinearLayout typeMainSearch = findViewById(R.id.mainsearch_type);
+        VerticalTabLayout typeTab = findViewById(R.id.tab_type);
+        ViewPager typeVp = findViewById(R.id.vp_type);
+        typeEntities = new ArrayList<>();
+        fragments = new ArrayList<>();
+
+        classificationVpFgAdapter = new ClassIficationVpFgAdapter(getChildFragmentManager());
+        typeVp.setAdapter(classificationVpFgAdapter);
+        typeTab.setupWithViewPager(typeVp);
     }
 
     @Override
     protected void initData() {
-
+        //调接口发网络请求
+        model.getTabCategory();
     }
 
     @Override
@@ -38,8 +53,8 @@ public class ClassIficationFragment extends BaseFragment<ClassIficationModel> im
     }
 
     @Override
-    protected ClassIficationModel initModel() {
-        return new ClassIficationModel();
+    protected HomeModel initModel() {
+        return new HomeModel();
     }
 
 
@@ -49,4 +64,43 @@ public class ClassIficationFragment extends BaseFragment<ClassIficationModel> im
     }
 
 
+    @Override
+    public void getCategorySuccess(List<TabCategoryEntity> result) {
+        if (result == null) {
+            return;
+        }
+        typeEntities.addAll(result);
+        for (TabCategoryEntity categoryEntity : typeEntities){
+                fragments.add(new TypeCategoryChildFragment(categoryEntity.getId()));
+
+        }
+        classificationVpFgAdapter.notifyDataSetChanged();
+    }
+
+
+    class ClassIficationVpFgAdapter extends FragmentPagerAdapter {
+
+        public ClassIficationVpFgAdapter(FragmentManager fm) {
+            super(fm);
+
+        }
+
+
+
+        @Override
+        public Fragment getItem(int i) {
+            return fragments.get(i);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return StringUtil.preventNull(typeEntities.get(position).getName());
+        }
+    }
 }

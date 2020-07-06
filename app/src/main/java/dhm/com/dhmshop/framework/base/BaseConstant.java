@@ -1,10 +1,10 @@
-package dhm.com.dhmshop.fromwork.base;
+package dhm.com.dhmshop.framework.base;
 
 /**
  * Created by  on 2018/3/27.
  */
 
-public class    BaseConstant {
+public class  BaseConstant {
     /**
      * TOKEN
      */
@@ -13,12 +13,4 @@ public class    BaseConstant {
      *ID
      */
     public static String ID = "";
-    /**
-     * 语言
-     */
-    public static String LANGUAGE = "";
-    /**
-     * 货币
-     */
-    public static String CURRENCY = "";
 }

@@ -2,17 +2,16 @@ package dhm.com.dhmshop.view.main;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.gyf.immersionbar.ImmersionBar;
 
 import java.util.ArrayList;
 
@@ -20,8 +19,8 @@ import java.util.ArrayList;
 import dhm.com.dhmshop.R;
 import dhm.com.dhmshop.adapter.MainVpFgAdapter;
 import dhm.com.dhmshop.base.BaseActiity;
-import dhm.com.dhmshop.fragment.classification.ClassificationFragment;
-import dhm.com.dhmshop.fragment.home.HomeFragment;
+import dhm.com.dhmshop.framework.module.type.fragment.ClassIficationFragment;
+import dhm.com.dhmshop.framework.module.home.fragment.HomeFragment;
 import dhm.com.dhmshop.fragment.shoppingcart.ShoppingcartFragment;
 import dhm.com.dhmshop.fragment.wode.WodeFragment;
 
@@ -34,7 +33,8 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     private ArrayList<String> titles;
     private ArrayList<Fragment> fragments;
     private HomeFragment homeFragment;
-    private ClassificationFragment classificationFragment;
+    private ClassIficationFragment classificationFragment;
+
     private ShoppingcartFragment shoppingcartFragment;
     private WodeFragment wodeFragment;
     private MainVpFgAdapter mainVpFgAdapter;
@@ -47,7 +47,12 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     @SuppressLint("NewApi")
     @Override
     protected void initView() {
-
+        ImmersionBar.with(this)
+                .transparentStatusBar()
+                .navigationBarColor(R.color.white)
+                .navigationBarAlpha(0.4f)//导航栏透明度，不写默认0.0F
+                .keyboardEnable(true)////解决软键盘与底部输入框冲突问题
+                .init();
         getWindow().setStatusBarColor(Color.LTGRAY);
         getWindow().setNavigationBarColor(Color.BLACK);
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
@@ -56,10 +61,11 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         mMainVp.setOnClickListener(this);
         mMainTablayout.setOnClickListener(this);
 
-
-        mMainVp = (ViewPager) findViewById(R.id.main_vp);
-        mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
-        mMainContainer = (LinearLayout) findViewById(R.id.main_container);
+        fragments = new ArrayList<>();
+        homeFragment = new HomeFragment();
+        classificationFragment = new ClassIficationFragment();
+        shoppingcartFragment = new ShoppingcartFragment();
+        wodeFragment = new WodeFragment();
 
         mMainTablayout.setSelectedTabIndicatorHeight(0);
         //创建tab
@@ -70,11 +76,8 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         titles.add("我的");
 
         //四个fragments
-        fragments = new ArrayList<>();
-        homeFragment = new HomeFragment();
-        classificationFragment = new ClassificationFragment();
-        shoppingcartFragment = new ShoppingcartFragment();
-        wodeFragment = new WodeFragment();
+
+
         fragments.add(homeFragment);
         fragments.add(classificationFragment);
         fragments.add(shoppingcartFragment);
@@ -92,9 +95,6 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         setupTabIcons();//设置底部TabLayout的item
 
 
-
-
-
     }
 
     @Override
@@ -103,11 +103,11 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     }
 
     //有几个底部的item就写几个
-     private void setupTabIcons() {
-         //tablayout图文效果
-         for (int i = 0; i < fragments.size(); i++) {
-             mMainTablayout.getTabAt(i).setCustomView(getView(i));
-         }
+    private void setupTabIcons() {
+        //tablayout图文效果
+        for (int i = 0; i < fragments.size(); i++) {
+            mMainTablayout.getTabAt(i).setCustomView(getView(i));
+        }
     }
 
     @SuppressLint("NewApi")
@@ -117,26 +117,18 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         TextView tv = (TextView) tabitem.findViewById(R.id.tabtv);
         tv.setText(titles.get(position));
 
-       /* if (position == 0) {
-            nav_title.setTextColor(getResources().getColor(R.color.colorPrimary));
-            nav_icon.setTextColor(getResources().getColor(R.color.colorPrimary));
-        } else {
-            nav_title.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
-            nav_icon.setTextColor(getResources().getColor(R.color.gray_navigation_bar));
-        }*/
 
-
-       switch (position){
-           case 0:
-           case 1:
-           case 2:
-               getWindow().setStatusBarColor(Color.LTGRAY);
-               break;
-           case 3:
-               getWindow().setStatusBarColor(getResources().getColor(R.color.main));
-               break;
-           default:
-       }
+        switch (position) {
+            case 0:
+            case 1:
+            case 2:
+                getWindow().setStatusBarColor(Color.LTGRAY);
+                break;
+            case 3:
+                getWindow().setStatusBarColor(getResources().getColor(R.color.main));
+                break;
+            default:
+        }
 
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.drawable.selector_show);
@@ -160,7 +152,6 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
                 break;
         }
     }
-
 
 
 }

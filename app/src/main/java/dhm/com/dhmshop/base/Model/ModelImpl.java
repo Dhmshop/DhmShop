@@ -10,6 +10,7 @@ import java.util.Map;
 
 import dhm.com.dhmshop.base.netWork.LoginContract;
 import dhm.com.dhmshop.base.netWork.RetrofitManager;
+import dhm.com.dhmshop.entity.GetOneCategory;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
@@ -137,6 +138,27 @@ public class ModelImpl implements LoginContract.Model {
             });
     }
 
+    @Override
+    public void getoneCategory(Context context, String path, Map<String, String> map, Class clazz, LoginContract.MyCallBack myCallBack) {
+        RetrofitManager.getInstance().post(path, map, new RetrofitManager.HttpListener() {
+            @Override
+            public void onSuccess(String data) {
+                GetOneCategory getOneCategory = new Gson().fromJson(data, GetOneCategory.class);
+                myCallBack.CallBack(getOneCategory);
+            }
+
+            @Override
+            public void onSuccess(Bitmap data) {
+
+            }
+
+            @Override
+            public void onFail(String error) {
+                myCallBack.fail(error);
+            }
+        });
+    }
+
 
     @Override
     public void uploadPost(Context context, String url, Map<String, RequestBody> partMap, List<MultipartBody.Part> file, final Class clazz, final LoginContract.MyCallBack myCallBack) {
@@ -158,4 +180,6 @@ public class ModelImpl implements LoginContract.Model {
                 }
             });
     }
+
+
 }

@@ -1,13 +1,17 @@
 package dhm.com.dhmshop.framework.module.home.fragment;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.youth.banner.Banner;
@@ -19,8 +23,9 @@ import java.util.List;
 import dhm.com.dhmshop.R;
 import dhm.com.dhmshop.framework.base.BaseFragment;
 import dhm.com.dhmshop.framework.base.MyBaseViewHolder;
-import dhm.com.dhmshop.framework.utils.GlideUtil;
-import dhm.com.dhmshop.framework.utils.StringUtil;
+import dhm.com.dhmshop.framework.module.home.activity.ListEliteGoodsActivity;
+import dhm.com.dhmshop.framework.module.home.activity.ListHotGoodsActivity;
+import dhm.com.dhmshop.framework.module.home.activity.RecommendShopListActivity;
 import dhm.com.dhmshop.framework.module.home.entity.EliteGoodsEntity;
 import dhm.com.dhmshop.framework.module.home.entity.HomeHotGoodsList;
 import dhm.com.dhmshop.framework.module.home.entity.HotBannerEntity;
@@ -29,8 +34,10 @@ import dhm.com.dhmshop.framework.module.home.entity.RecommendShopEntity;
 import dhm.com.dhmshop.framework.module.home.entity.TopNewsEntity;
 import dhm.com.dhmshop.framework.module.home.model.HomeHotModel;
 import dhm.com.dhmshop.framework.module.home.view.HomeHotView;
+import dhm.com.dhmshop.framework.utils.GlideUtil;
+import dhm.com.dhmshop.framework.utils.StringUtil;
 
-public class HomeHotFragment extends BaseFragment<HomeHotModel> implements HomeHotView {
+public class HomeHotFragment extends BaseFragment<HomeHotModel> implements HomeHotView, View.OnClickListener {
 
     private Banner home_banner;
     private ImageView hotGoodsImage;
@@ -38,6 +45,10 @@ public class HomeHotFragment extends BaseFragment<HomeHotModel> implements HomeH
     private ImageView hasGoodImage;
     private ViewFlipper viewFlipper;
     private HotGoodsListAdapter goodsListAdapter;
+    private View view;
+    private LinearLayout isHotGoods;
+    private RelativeLayout isEliteGoods;
+    private RelativeLayout homeRecommendShop;
 
     public HomeHotFragment() {
     }
@@ -52,6 +63,14 @@ public class HomeHotFragment extends BaseFragment<HomeHotModel> implements HomeH
         RecyclerView hotGoodsList = findViewById(R.id.hot_goods_list);
         goodsListAdapter = new HotGoodsListAdapter();
         hotGoodsList.setAdapter(goodsListAdapter);
+
+
+        isHotGoods = findViewById(R.id.is_hot_goods);
+        isHotGoods.setOnClickListener(this);
+        isEliteGoods = findViewById(R.id.is_elite_goods);
+        isEliteGoods.setOnClickListener(this);
+        homeRecommendShop = findViewById(R.id.home_recommend_shop);
+        homeRecommendShop.setOnClickListener(this);
     }
 
     @Override
@@ -95,46 +114,42 @@ public class HomeHotFragment extends BaseFragment<HomeHotModel> implements HomeH
                     @Override
                     public void displayImage(Context context, Object path, ImageView imageView) {
                         HotBannerEntity.InfoBean images = (HotBannerEntity.InfoBean) path;
-                        GlideUtil.loadImage(context,images.getContent(),imageView);
+                        GlideUtil.loadImage(context, images.getContent(), imageView);
                     }
                 }).start();
     }
 
     /**
-     *
      * @param hotGoodsEntities 首页热门的商品(单个商品)成功回调
      */
     @Override
     public void onSuccessHotGoods(List<HotGoodsEntity> hotGoodsEntities) {
-        GlideUtil.loadImage(context,StringUtil.preventNull(hotGoodsEntities.get(0).getGoods_images()),hotGoodsImage);
+        GlideUtil.loadImage(context, StringUtil.preventNull(hotGoodsEntities.get(0).getGoods_images()), hotGoodsImage);
     }
 
     /**
-     *
      * @param eliteGoodsEntities 首页有好货的商品成功回调
      */
     @Override
     public void onSuccessEliteGoods(List<EliteGoodsEntity> eliteGoodsEntities) {
-        GlideUtil.loadImage(context, StringUtil.preventNull(eliteGoodsEntities.get(0).getGoods_images()),hasGoodImage);
+        GlideUtil.loadImage(context, StringUtil.preventNull(eliteGoodsEntities.get(0).getGoods_images()), hasGoodImage);
     }
 
     /**
-     *
      * @param recommendShopEntities 首页每日好店成功回调
      */
     @Override
     public void onSuccessRecommendShop(List<RecommendShopEntity> recommendShopEntities) {
-        GlideUtil.loadImage(context,StringUtil.preventNull(recommendShopEntities.get(0).getImg()),dailyShopImage);
+        GlideUtil.loadImage(context, StringUtil.preventNull(recommendShopEntities.get(0).getImg()), dailyShopImage);
     }
 
     /**
-     *
      * @param topNewsEntities 首页头条成功回调
      */
     @Override
     public void onSuccessTopNews(List<TopNewsEntity> topNewsEntities) {
-        for (TopNewsEntity topNews : topNewsEntities){
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.hometopnewsitem, viewFlipper,false);
+        for (TopNewsEntity topNews : topNewsEntities) {
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.hometopnewsitem, viewFlipper, false);
             TextView title = view.findViewById(R.id.zixuntitle);
             title.setText(topNews.getPost_title());
             viewFlipper.addView(view);
@@ -147,7 +162,7 @@ public class HomeHotFragment extends BaseFragment<HomeHotModel> implements HomeH
      */
     @Override
     public void onSuccessHotGoodsList(List<HomeHotGoodsList> homeHotGoodsLists) {
-        if (homeHotGoodsLists == null || homeHotGoodsLists.size() == 0){
+        if (homeHotGoodsLists == null || homeHotGoodsLists.size() == 0) {
             return;
         }
         goodsListAdapter.addData(homeHotGoodsLists);
@@ -162,20 +177,43 @@ public class HomeHotFragment extends BaseFragment<HomeHotModel> implements HomeH
         viewFlipper.stopFlipping();
     }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.is_hot_goods:
+                Intent intent2 = new Intent(getActivity(), ListHotGoodsActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.is_elite_goods:
+                Intent intent1 = new Intent(getActivity(), ListEliteGoodsActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.home_recommend_shop:
+                Intent intent = new Intent(getActivity(), RecommendShopListActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+
     /**
      * 热门商品内部适配器
      */
-    class HotGoodsListAdapter extends BaseQuickAdapter<HomeHotGoodsList, MyBaseViewHolder>{
+    class HotGoodsListAdapter extends BaseQuickAdapter<HomeHotGoodsList, MyBaseViewHolder> {
 
         public HotGoodsListAdapter() {
             super(R.layout.hotgoodslistitem);
         }
+
         @Override
         protected void convert(MyBaseViewHolder helper, HomeHotGoodsList item) {
-            helper.setText(R.id.goods_name,StringUtil.preventNull(item.getGoods_name()))
-                    .setText(R.id.price,StringUtil.preventNull(item.getPrice()))
-                    .setText(R.id.sale_num,StringUtil.buildString(item.getSale_num(),"人付款"));
-            GlideUtil.loadImage(context,item.getGoods_images(),helper.getView(R.id.goods_images));
+            helper.setText(R.id.goods_name, StringUtil.preventNull(item.getGoods_name()))
+                    .setText(R.id.price, StringUtil.preventNull(item.getPrice()))
+                    .setText(R.id.sale_num, StringUtil.buildString(item.getSale_num(), "人付款"));
+            GlideUtil.loadImage(context, item.getGoods_images(), helper.getView(R.id.goods_images));
         }
     }
 }

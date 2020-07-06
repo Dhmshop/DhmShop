@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.fromwork.utils;
+package dhm.com.dhmshop.framework.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

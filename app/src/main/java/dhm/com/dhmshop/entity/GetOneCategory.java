@@ -2,7 +2,7 @@ package dhm.com.dhmshop.entity;
 
 import java.util.List;
 
-public class GetFirstClassification {
+public class GetOneCategory {
 
     /**
      * code : 1

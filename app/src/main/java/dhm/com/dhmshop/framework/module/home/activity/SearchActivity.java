@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.view.main;
+package dhm.com.dhmshop.framework.module.home.activity;
 
 import android.os.Bundle;
 import android.text.SpannableString;

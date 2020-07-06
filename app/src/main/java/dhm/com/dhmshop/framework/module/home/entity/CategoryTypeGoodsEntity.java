@@ -1,7 +1,10 @@
-package dhm.com.dhmshop.module.home.entity;
+package dhm.com.dhmshop.framework.module.home.entity;
 
 import java.util.List;
 
+/**
+ *获取父类下面的所有子类和销量前六的产品
+ */
 public class CategoryTypeGoodsEntity {
     private List<CatelistBean> catelist;
     private List<GoodsBean> goods;

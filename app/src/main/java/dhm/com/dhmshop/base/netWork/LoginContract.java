@@ -25,6 +25,8 @@ public class LoginContract {
         void requestDelete(Context context, String quxiao, Map<String, String> map, Class clazz, MyCallBack myCallBack);
 
         void imagePost(Context context, String url, Map<String, String> map, Class clazz, MyCallBack myCallBack);
+        void getoneCategory(Context context, String path, Map<String, String> map, Class clazz, MyCallBack myCallBack);
+
     }
 
     public interface IView {

@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.fromwork.base;
+package dhm.com.dhmshop.framework.base;
 
 /**
  * Created by zjy on 2019/11/27.

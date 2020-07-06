@@ -3,8 +3,11 @@ package dhm.com.dhmshop.framework.module.home.fragment;
 
 import android.annotation.SuppressLint;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 
@@ -71,10 +74,10 @@ public class HomeTabTypeFragment extends BaseFragment<HomeCategoryTypeModel> imp
 
     @Override
     public void onCategoryGoodsListSuccess(CategoryTypeGoodsEntity categoryTypeGoodsEntity) {
-        if (categoryTypeGoodsEntity.getCatelist() != null && categoryTypeGoodsEntity.getCatelist().size() > 0){
+        if (categoryTypeGoodsEntity.getCatelist() != null && categoryTypeGoodsEntity.getCatelist().size() > 0) {
             topTypeAdapter.addData(categoryTypeGoodsEntity.getCatelist());
         }
-        if (categoryTypeGoodsEntity.getGoods() != null && categoryTypeGoodsEntity.getGoods().size() > 0){
+        if (categoryTypeGoodsEntity.getGoods() != null && categoryTypeGoodsEntity.getGoods().size() > 0) {
             goodsListAdapter.addData(categoryTypeGoodsEntity.getGoods());
         }
     }
@@ -91,7 +94,9 @@ public class HomeTabTypeFragment extends BaseFragment<HomeCategoryTypeModel> imp
         @Override
         protected void convert(MyBaseViewHolder helper, CategoryTypeGoodsEntity.CatelistBean item) {
             helper.setText(R.id.name, item.getName());
-            GlideUtil.loadImage(context, StringUtil.preventNull(item.getThumb()), helper.getView(R.id.thumb));
+
+            ImageView thumb = helper.getView(R.id.thumb);
+            Glide.with(context).load(item.getThumb()).into(thumb);
         }
     }
 
@@ -99,7 +104,7 @@ public class HomeTabTypeFragment extends BaseFragment<HomeCategoryTypeModel> imp
      * 商品列表 适配器
      */
 
-    class GoodsListAdapter extends BaseQuickAdapter<CategoryTypeGoodsEntity.GoodsBean,MyBaseViewHolder>{
+    class GoodsListAdapter extends BaseQuickAdapter<CategoryTypeGoodsEntity.GoodsBean, MyBaseViewHolder> {
 
         public GoodsListAdapter() {
             super(R.layout.hotgoodslistitem);
@@ -107,10 +112,10 @@ public class HomeTabTypeFragment extends BaseFragment<HomeCategoryTypeModel> imp
 
         @Override
         protected void convert(MyBaseViewHolder helper, CategoryTypeGoodsEntity.GoodsBean item) {
-            helper.setText(R.id.goods_name,StringUtil.preventNull(item.getGoods_name()))
-                    .setText(R.id.price,StringUtil.preventNull(item.getPrice()))
-                    .setText(R.id.sale_num,StringUtil.buildString(item.getSale_num(),"人付款"));
-            GlideUtil.loadImage(context,item.getGoods_images(),helper.getView(R.id.goods_images));
+            helper.setText(R.id.goods_name, StringUtil.preventNull(item.getGoods_name()))
+                    .setText(R.id.price, StringUtil.preventNull(item.getPrice()))
+                    .setText(R.id.sale_num, StringUtil.buildString(item.getSale_num(), "人付款"));
+            GlideUtil.loadImage(context, item.getGoods_images(), helper.getView(R.id.goods_images));
         }
     }
 }

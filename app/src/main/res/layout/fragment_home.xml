@@ -1,48 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragment.home.HomeFragment">
+    tools:context=".framework.module.home.fragment.HomeFragment">
 
-    <LinearLayout
-
-        android:id="@+id/mainsearch_homefg"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_35"
-        android:layout_marginLeft="@dimen/dp_15"
-        android:layout_marginTop="@dimen/sp_12"
-        android:layout_marginRight="@dimen/dp_15"
-        android:layout_marginBottom="@dimen/dp_10"
-        android:background="@drawable/mainsearchshape"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:layout_width="@dimen/dp_20"
-            android:layout_height="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_10"
-            android:background="@mipmap/magnifier" />
+        android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="请输入搜索关键词"
-            android:textColor="#999999" />
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F7F6FB" />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_homefg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="scrollable" />
+        <TextView
+            android:id="@+id/one"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_135"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@color/white" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_homefg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="#F7F6FB" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/two"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:layout_below="@id/one"
+            android:layout_marginTop="@dimen/dps_70"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@drawable/back_home" />
+
+
+        <LinearLayout
+            android:id="@+id/mainsearch_homefg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/sp_12"
+            android:layout_marginRight="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@drawable/mainsearchshape"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <ImageButton
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_10"
+                android:background="@mipmap/magnifier" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请输入搜索关键词"
+                android:textColor="#999999" />
+        </LinearLayout>
+
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_homefg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_30"
+            android:overScrollMode="never"
+            app:tabRippleColor = "@android:color/transparent"
+            app:tabIndicatorHeight="3dp"
+            app:tabIndicatorColor="#FFE6EC"
+            app:tabIndicatorFullWidth="false"
+            android:layout_below="@id/mainsearch_homefg"
+            app:tabSelectedTextColor="#FE004E"
+            app:tabTextColor="#222222"
+            app:tabMode="scrollable" />
+
+        <android.support.v4.view.ViewPager
+            android:layout_below="@id/tab_homefg"
+            android:overScrollMode="never"
+            android:id="@+id/vp_homefg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</FrameLayout>

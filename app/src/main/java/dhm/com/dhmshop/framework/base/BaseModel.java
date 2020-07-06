@@ -1,8 +1,8 @@
-package dhm.com.dhmshop.fromwork.base;
+package dhm.com.dhmshop.framework.base;
 
 import android.app.Activity;
 
-import dhm.com.dhmshop.fromwork.network.RetrofitFactory;
+import dhm.com.dhmshop.framework.network.RetrofitFactory;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;

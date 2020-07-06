@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.fromwork.base;
+package dhm.com.dhmshop.framework.base;
 
 import android.app.Activity;
 import android.content.Context;

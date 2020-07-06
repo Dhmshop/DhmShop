@@ -1,4 +1,4 @@
-package dhm.com.dhmshop.module.home.model;
+package dhm.com.dhmshop.framework.module.home.model;
 
 import java.util.List;
 
@@ -6,13 +6,13 @@ import dhm.com.dhmshop.framework.base.BaseModel;
 import dhm.com.dhmshop.framework.network.OnSuccessAndFaultListener;
 import dhm.com.dhmshop.framework.network.OnSuccessAndFaultSub;
 import dhm.com.dhmshop.framework.utils.ToastUtil;
-import dhm.com.dhmshop.module.home.entity.EliteGoodsEntity;
-import dhm.com.dhmshop.module.home.entity.HomeHotGoodsList;
-import dhm.com.dhmshop.module.home.entity.HotBannerEntity;
-import dhm.com.dhmshop.module.home.entity.HotGoodsEntity;
-import dhm.com.dhmshop.module.home.entity.RecommendShopEntity;
-import dhm.com.dhmshop.module.home.entity.TopNewsEntity;
-import dhm.com.dhmshop.module.home.view.HomeHotView;
+import dhm.com.dhmshop.framework.module.home.entity.EliteGoodsEntity;
+import dhm.com.dhmshop.framework.module.home.entity.HomeHotGoodsList;
+import dhm.com.dhmshop.framework.module.home.entity.HotBannerEntity;
+import dhm.com.dhmshop.framework.module.home.entity.HotGoodsEntity;
+import dhm.com.dhmshop.framework.module.home.entity.RecommendShopEntity;
+import dhm.com.dhmshop.framework.module.home.entity.TopNewsEntity;
+import dhm.com.dhmshop.framework.module.home.view.HomeHotView;
 
 public class HomeHotModel extends BaseModel<HomeHotView> {
     /**
