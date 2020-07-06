@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#E5E5E5"
+        android:layout_below="@id/back"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        />
+
+    <RadioButton
+        android:id="@+id/btn_camera_pop_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="@dimen/dp_8"
+        android:text="零食饮品"
+        android:paddingLeft="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:textColor="#222"
+        android:theme="@style/CheckBoxTheme"
+        android:textSize="@dimen/sp_18" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recy"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_height="wrap_content"
+        >
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

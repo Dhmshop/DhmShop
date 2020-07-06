@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     tools:context=".view.mine.SafeActivity">
     <TextView
         android:layout_width="match_parent"
@@ -126,4 +127,5 @@
             />
     </LinearLayout>
 
+>>>>>>> 21b9becd14cbe3394518b4702e2223a21048fb54
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package dhm.com.dhmshop.base.netWork;
 
+import android.os.Environment;
+
 import dhm.com.dhmshop.utils.EncryptUtil;
 
 public interface Constant {
@@ -122,7 +124,100 @@ public interface Constant {
     //获取父类下面的所有子类和销量前六的产品 首页女装
     String GetChildCategoryGoods = "/appapi/goods/get_child_category_goods";
 
+    //    拍照
+    public static final int IMAGE_REQUEST_CODE = 12;
+    public static final int REQUESTCODE = 200;
+    public static final int REQUESTCODE1 = 201;
+    public static final int RESULTCODE = 300;
+
+    //拍照用到
+    public static final String Tag = "dhm.com.dhmshop.fileProvider";
+
+    //头像地址
+    public static final String HeadPath = Environment.getExternalStorageDirectory().getAbsolutePath() +
+            "/Shop/Image/HeadPath/";
+    //头像地址
+    public static final String ImagePath = Environment.getExternalStorageDirectory().getAbsolutePath() +
+            "/Shop/Image/ImagePath/";
+
+    //    店铺地址
+    static String STOREIMGPATH = Environment.getExternalStorageDirectory().getAbsolutePath() +
+            "/shop/Image/StroeImgPath/";
 
 
+    //获取店铺收益总额
+    String ShopProfit= "/appapi/shop/shop_profit";
+
+    //删除某个地址
+    String DelAddress= "/appapi/user/del_address";
+
+    //获取我的店铺信息
+    String GetMyShopinfo= "/appapi/shop/get_my_shopinfo";
+
+    //修改我的店铺信息
+    String FixShopinfo= "/appapi/shop/modify_shop_info";
+
+    //小店上货
+    String AddGoods= "/appapi/goods/add_goods";
+
+    //获取一级分类
+    String GetOneCategory= "/appapi/goods/get_one_category";
+
+    //取父类下面的所有子类
+    String GetChildCategory= "/appapi/goods/get_child_category";
+
+    //关于
+    String GetAboutCon= "/appapi/user/get_about_con";
+
+    //获取我发布的商品列表
+    String GetMyGoods= "/appapi/goods/get_my_goods";
+
+    //获取购物车列表
+    String ShoppingList= "/appapi/goods/shopping_list";
+
+    //收藏店铺
+    String AddShopCollect= "/appapi/shop/add_shop_collect";
+
+    //取消收藏店铺
+    String DelShopCollect= "/appapi/shop/del_shop_collect";
+
+    //查看我收藏的店铺
+    String MyShopCollects= "/appapi/shop/my_shop_collects";
+
+    //获取单个商品信息
+    String OneGoods= "/appapi/goods/one_goods";
+
+    //获取全部订单
+    String Allorders= "/appapi/order/all_orders";
+
+    //获取广告图片列表
+    String ShopAds= "/appapi/shop/shop_ads";
+
+    //上传店铺广告图
+    String AddShopAds= "/appapi/shop/add_shop_ads";
+
+    //删除广告图片
+    String DelShopAds= "/appapi/shop/del_shop_ads";
+
+    //获取店铺订单总数
+    String ShopOrderCount= "/appapi/shop/shop_order_count";
+
+    //向商家催发货
+    String AddSendOrder= "/appapi/order/add_send_order";
+
+    //确认收货
+    String OrderOver= "/appapi/order/order_over";
+
+    //修改订单收货地址
+    String OrderAddressModify= "/appapi/order/order_address_modify";
+
+    //发布评价
+    String AddGoodsComments= "/appapi/order/add_goods_comments";
+
+    //发布评价
+    String LogisticsInfo= "/appapi/order/logistics_info";
+
+    //发布评价
+    String CashOutShop= "/appapi/pay/cash_out_shop";
 
 }

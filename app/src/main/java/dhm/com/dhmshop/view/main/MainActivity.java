@@ -2,16 +2,18 @@ package dhm.com.dhmshop.view.main;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.gyf.immersionbar.ImmersionBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,10 +21,10 @@ import java.util.ArrayList;
 import dhm.com.dhmshop.R;
 import dhm.com.dhmshop.adapter.MainVpFgAdapter;
 import dhm.com.dhmshop.base.BaseActiity;
-import dhm.com.dhmshop.framework.module.type.fragment.ClassIficationFragment;
-import dhm.com.dhmshop.framework.module.home.fragment.HomeFragment;
 import dhm.com.dhmshop.fragment.shoppingcart.ShoppingcartFragment;
 import dhm.com.dhmshop.fragment.wode.WodeFragment;
+import dhm.com.dhmshop.framework.module.home.fragment.HomeFragment;
+import dhm.com.dhmshop.framework.module.type.fragment.ClassIficationFragment;
 
 public class MainActivity extends BaseActiity implements View.OnClickListener {
 
@@ -34,7 +36,6 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     private ArrayList<Fragment> fragments;
     private HomeFragment homeFragment;
     private ClassIficationFragment classificationFragment;
-
     private ShoppingcartFragment shoppingcartFragment;
     private WodeFragment wodeFragment;
     private MainVpFgAdapter mainVpFgAdapter;
@@ -47,25 +48,13 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     @SuppressLint("NewApi")
     @Override
     protected void initView() {
-        ImmersionBar.with(this)
-                .transparentStatusBar()
-                .navigationBarColor(R.color.white)
-                .navigationBarAlpha(0.4f)//导航栏透明度，不写默认0.0F
-                .keyboardEnable(true)////解决软键盘与底部输入框冲突问题
-                .init();
-        getWindow().setStatusBarColor(Color.LTGRAY);
+
         getWindow().setNavigationBarColor(Color.BLACK);
         mMainVp = (ViewPager) findViewById(R.id.main_vp);
         mMainTablayout = (TabLayout) findViewById(R.id.main_tablayout);
         mMainContainer = (LinearLayout) findViewById(R.id.main_container);
         mMainVp.setOnClickListener(this);
         mMainTablayout.setOnClickListener(this);
-
-        fragments = new ArrayList<>();
-        homeFragment = new HomeFragment();
-        classificationFragment = new ClassIficationFragment();
-        shoppingcartFragment = new ShoppingcartFragment();
-        wodeFragment = new WodeFragment();
 
         mMainTablayout.setSelectedTabIndicatorHeight(0);
         //创建tab
@@ -76,8 +65,11 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         titles.add("我的");
 
         //四个fragments
-
-
+        fragments = new ArrayList<>();
+        homeFragment = new HomeFragment();
+        classificationFragment = new ClassIficationFragment();
+        shoppingcartFragment = new ShoppingcartFragment();
+        wodeFragment = new WodeFragment();
         fragments.add(homeFragment);
         fragments.add(classificationFragment);
         fragments.add(shoppingcartFragment);
@@ -94,6 +86,41 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
 
         setupTabIcons();//设置底部TabLayout的item
 
+        mMainTablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int position = tab.getPosition();
+
+                switch (position){
+                    case 0:
+                        getWindow().setStatusBarColor(Color.LTGRAY);
+                        break;
+                    case 1:
+                        getWindow().setStatusBarColor(Color.LTGRAY);
+                        break;
+                    case 2:
+                        getWindow().setStatusBarColor(Color.LTGRAY);
+                        break;
+                    case 3:
+                        getWindow().setStatusBarColor(getResources().getColor(R.color.main));
+                        break;
+                    default:
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+
 
     }
 
@@ -103,11 +130,11 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
     }
 
     //有几个底部的item就写几个
-    private void setupTabIcons() {
-        //tablayout图文效果
-        for (int i = 0; i < fragments.size(); i++) {
-            mMainTablayout.getTabAt(i).setCustomView(getView(i));
-        }
+     private void setupTabIcons() {
+         //tablayout图文效果
+         for (int i = 0; i < fragments.size(); i++) {
+             mMainTablayout.getTabAt(i).setCustomView(getView(i));
+         }
     }
 
     @SuppressLint("NewApi")
@@ -116,20 +143,6 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
         ImageView iv = (ImageView) tabitem.findViewById(R.id.tabiv);
         TextView tv = (TextView) tabitem.findViewById(R.id.tabtv);
         tv.setText(titles.get(position));
-
-
-        switch (position) {
-            case 0:
-            case 1:
-            case 2:
-                getWindow().setStatusBarColor(Color.LTGRAY);
-                break;
-            case 3:
-                getWindow().setStatusBarColor(getResources().getColor(R.color.main));
-                break;
-            default:
-        }
-
         ArrayList<Integer> images = new ArrayList<>();
         images.add(R.drawable.selector_show);
         images.add(R.drawable.selector_classification);
@@ -151,6 +164,33 @@ public class MainActivity extends BaseActiity implements View.OnClickListener {
             case R.id.main_tablayout:
                 break;
         }
+    }
+
+
+
+
+
+
+
+    /**
+     * 防止误触退出
+     */
+    private long mExitTime;
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+
+            } else {
+                finish();
+            }
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
 

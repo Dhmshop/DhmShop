@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tabtv"
+        android:textSize="@dimen/sp_16"
+        android:layout_width="wrap_content"
+        android:textColor="@drawable/tabtext"
+        android:layout_height="wrap_content"
+        android:text="全部宝贝" />
+    <TextView
+        android:id="@+id/b"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_2"
+        android:background="@drawable/shape_shop"
+        android:layout_marginTop="@dimen/dp_10"
+        />
+</LinearLayout>

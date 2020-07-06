@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dhm.com.dhmshop.R;
-import dhm.com.dhmshop.adapter.ShowAddrAdapter;
+import dhm.com.dhmshop.adapter.mine.ShowAddrAdapter;
 import dhm.com.dhmshop.base.BaseActiity;
 import dhm.com.dhmshop.base.Presenter.PressenterImpl;
 import dhm.com.dhmshop.base.netWork.Constant;

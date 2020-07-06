@@ -16,8 +16,14 @@ import android.view.WindowManager;
 import dhm.com.dhmshop.utils.StatusBarUtil;
 
 import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-
 public abstract class BaseActiity extends AppCompatActivity {
+
+
+    /**
+     * 记录处于前台的Activity
+     */
+    private static BaseActiity mForegroundActivity = null;
+
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +47,7 @@ public abstract class BaseActiity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         // 状态栏（以上几行代码必须，参考setStatusBarColor|setNavigationBarColor方法源码）
         window.setNavigationBarColor(Color.BLACK);
+        getWindow().setStatusBarColor(Color.LTGRAY);
         initView();
         stateNetWork();
         initData();
@@ -103,4 +110,19 @@ public abstract class BaseActiity extends AppCompatActivity {
     public void exit() {    //将所有的Activity全部销毁
         finish();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mForegroundActivity = this;
+    }
+
+    /**
+     * 获取当前处于前台的activity
+     */
+    public static BaseActiity getForegroundActivity() {
+        return mForegroundActivity;
+    }
+
+
 }

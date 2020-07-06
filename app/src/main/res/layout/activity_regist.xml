@@ -16,11 +16,13 @@
         android:orientation="vertical"
         >
         <TextView
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/mainblack"
             android:textSize="@dimen/sp_21"
             android:gravity="center"
+            android:layout_marginTop="@dimen/dp_10"
             android:text="免费注册"
             />
         <TextView
@@ -259,4 +261,5 @@
 
 
 
+>>>>>>> 21b9becd14cbe3394518b4702e2223a21048fb54
 </ScrollView>

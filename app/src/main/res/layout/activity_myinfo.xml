@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/white"
     android:layout_height="match_parent"
     tools:context=".view.mine.MyinfoActivity">
     <TextView
@@ -12,6 +13,7 @@
         android:text="个人资料"
         android:textSize="@dimen/sp_21"
         android:gravity="center"
+        android:textColor="@color/mainblack"
         android:layout_marginTop="@dimen/dp_9"
         />
     <ImageView
@@ -31,7 +33,7 @@
         android:layout_marginTop="@dimen/dp_5"
         />
     <LinearLayout
-        android:id="@+id/head_image"
+        android:id="@+id/headimage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/back"
@@ -43,10 +45,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="头像"
+            android:textColor="@color/mainblack"
             android:layout_marginLeft="@dimen/dp_15"
             android:textSize="@dimen/sp_16"
             />
         <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/head_image"
             android:layout_width="@dimen/dp_38"
             android:layout_height="@dimen/dp_38"
             android:src="@mipmap/image"
@@ -66,15 +70,15 @@
         android:layout_width="@dimen/dp_345"
         android:layout_height="@dimen/dp_1"
         android:background="#E5E5E5"
-        android:layout_below="@id/head_image"
+        android:layout_below="@id/headimage"
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/dp_10"
         />
     <LinearLayout
-        android:id="@+id/nackName"
+        android:id="@+id/nack_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/head_image"
+        android:layout_below="@id/headimage"
         android:gravity="center_vertical"
         android:layout_marginTop="@dimen/dp_20"
         >
@@ -83,10 +87,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="昵称"
+            android:textColor="@color/mainblack"
             android:layout_marginLeft="@dimen/dp_15"
             android:textSize="@dimen/sp_16"
             />
         <TextView
+            android:id="@+id/nickname"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_35"
             android:padding="@dimen/dp_5"
@@ -102,7 +108,7 @@
         android:layout_width="@dimen/dp_345"
         android:layout_height="@dimen/dp_1"
         android:background="#E5E5E5"
-        android:layout_below="@id/nackName"
+        android:layout_below="@id/nack_name"
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/dp_10"
         />
@@ -110,7 +116,7 @@
         android:id="@+id/sex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/nackName"
+        android:layout_below="@id/nack_name"
         android:gravity="center_vertical"
         android:layout_marginTop="@dimen/dp_20"
         >
@@ -119,10 +125,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="性别"
+            android:textColor="@color/mainblack"
             android:layout_marginLeft="@dimen/dp_15"
             android:textSize="@dimen/sp_16"
             />
         <TextView
+            android:id="@+id/text_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="女"
@@ -158,10 +166,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="地区"
+            android:textColor="@color/mainblack"
             android:layout_marginLeft="@dimen/dp_15"
             android:textSize="@dimen/sp_16"
             />
         <TextView
+            android:id="@+id/text_area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="北京"
@@ -192,4 +202,5 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="@dimen/dp_250"
         />
+>>>>>>> 21b9becd14cbe3394518b4702e2223a21048fb54
 </RelativeLayout>

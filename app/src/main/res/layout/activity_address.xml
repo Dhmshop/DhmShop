@@ -47,5 +47,12 @@
         android:layout_marginLeft="@dimen/dp_15"
         >
     </android.support.v7.widget.RecyclerView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#E5E5E5"
+        android:layout_below="@id/back"
+        />
 
+>>>>>>> 21b9becd14cbe3394518b4702e2223a21048fb54
 </RelativeLayout>
